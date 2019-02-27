@@ -1,0 +1,15 @@
+language: go
+
+go:
+  - "1.10"
+
+git:
+  depth: 1
+
+cache:
+  directories:
+    - $GOPATH/src
+    - $GOPATH/pkg
+
+script:
+  - go test ./...
