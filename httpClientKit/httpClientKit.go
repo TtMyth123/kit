@@ -3,13 +3,17 @@ package httpClientKit
 import (
 	"crypto/tls"
 	"fmt"
+	"io"
 	"io/ioutil"
 	"net"
 	"net/http"
 	"net/http/cookiejar"
 	"net/url"
+	"strings"
 	"time"
 )
+
+type HandlerFunc_Response func(resp *http.Response)
 
 type HttpClient struct {
 	client        *http.Client
@@ -69,20 +73,47 @@ func (this *HttpClient) GetString1(strUrl string) (string, error) {
 }
 
 func (this *HttpClient) GetString(strUrl string) (string, error) {
+
+	LoopI := 0
+	//time.Sleep(time.Millisecond * 200)
 	u, err := url.Parse(strUrl)
 	if err != nil {
 		return "", err
 	}
 	this.client.Jar = this.gCurCookieJar
+
+	LoopIA := 0
+LoopGet:
+	LoopIA++
+	LoopI++;
 	resp, err := this.client.Get(strUrl)
 	this.gCurCookies = this.gCurCookieJar.Cookies(u)
 
 	if err != nil {
+		strE := err.Error()
+		if strings.Contains(strE, "timeout") && LoopI < 4 {
+			goto LoopGet
+		}
+		fmt.Println(strE)
 		return "", err
 	}
 	defer resp.Body.Close()
+
+	LoopI = 0
+LoopReadAll:
+	LoopI++
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
+		strE := err.Error()
+		if strings.Contains(strE, "timeout") && LoopI < 4 {
+			goto LoopReadAll
+		}
+
+		if LoopIA < 3 {
+			goto LoopGet
+		}
+
+		fmt.Println(strE)
 		return "", err
 	}
 	return string(body), err
@@ -106,13 +137,74 @@ func (this *HttpClient) GetBytes(strUrl string) ([]byte, error) {
 	return body, err
 }
 
-func (this *HttpClient) PostForm(strUrl string, data url.Values) (string, error) {
+func (this *HttpClient) GetStringCallBark(strUrl string, callBark HandlerFunc_Response) (string, error) {
 	u, err := url.Parse(strUrl)
 	if err != nil {
 		return "", err
 	}
 	this.client.Jar = this.gCurCookieJar
-	resp, err := this.client.PostForm(strUrl, data)
+
+	resp, err := this.client.Get(strUrl)
+	this.gCurCookies = this.gCurCookieJar.Cookies(u)
+
+	if err != nil {
+		return "", err
+	}
+	defer resp.Body.Close()
+	if callBark != nil {
+		callBark(resp)
+	}
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return "", err
+	}
+	return string(body), err
+}
+
+func (this *HttpClient) DoRequest(method, strUrl string, paramsHeader map[string]string, data io.Reader) ([]byte, error) {
+	u, err := url.Parse(strUrl)
+	if err != nil {
+		return nil, err
+	}
+
+	req, _ := http.NewRequest(method, strUrl, data)
+	this.client.Jar = this.gCurCookieJar
+
+	if paramsHeader != nil {
+		for k, v := range paramsHeader {
+			req.Header.Set(k, v)
+		}
+	}
+
+	resp, err := this.client.Do(req)
+	this.gCurCookies = this.gCurCookieJar.Cookies(u)
+
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	body, err := ioutil.ReadAll(resp.Body)
+
+	return body, err
+}
+
+func (this *HttpClient) PostFormHeader(strUrl string, paramsHeader map[string]string, data url.Values) (string, error) {
+	u, err := url.Parse(strUrl)
+	if err != nil {
+		return "", err
+	}
+
+	req, _ := http.NewRequest("POST", strUrl, strings.NewReader(data.Encode()))
+	this.client.Jar = this.gCurCookieJar
+
+	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+	if paramsHeader != nil {
+		for k, v := range paramsHeader {
+			req.Header.Set(k, v)
+		}
+	}
+
+	resp, err := this.client.Do(req)
 	this.gCurCookies = this.gCurCookieJar.Cookies(u)
 
 	if err != nil {
@@ -123,5 +215,52 @@ func (this *HttpClient) PostForm(strUrl string, data url.Values) (string, error)
 	if err != nil {
 		return "", err
 	}
+	return string(body), err
+}
+
+func (this *HttpClient) PostForm(strUrl string, data url.Values) (string, error) {
+	return this.PostFormCallBark(strUrl, data, nil)
+}
+
+func (this *HttpClient) PostFormCallBark(strUrl string, data url.Values, callBark HandlerFunc_Response) (string, error) {
+	u, err := url.Parse(strUrl)
+	if err != nil {
+		return "", err
+	}
+	this.client.Jar = this.gCurCookieJar
+
+	resp, err := this.client.PostForm(strUrl, data)
+	this.gCurCookies = this.gCurCookieJar.Cookies(u)
+
+	if err != nil {
+		return "", err
+	}
+	defer resp.Body.Close()
+	if callBark != nil {
+		callBark(resp)
+	}
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return "", err
+	}
+	return string(body), err
+}
+
+func (this *HttpClient) PostJson(strUrl, strJsonData string) (string, error) {
+	u, err := url.Parse(strUrl)
+	if err != nil {
+		return "", err
+	}
+
+	this.client.Jar = this.gCurCookieJar
+	contentType := `application/json`
+	resp, err := this.client.Post(strUrl, contentType, strings.NewReader(strJsonData))
+	this.gCurCookies = this.gCurCookieJar.Cookies(u)
+
+	if err != nil {
+		return "", err
+	}
+	defer resp.Body.Close()
+	body, err := ioutil.ReadAll(resp.Body)
 	return string(body), err
 }

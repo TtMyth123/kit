@@ -38,3 +38,27 @@ func GetStrTime(t1 time.Time) string {
 func init() {
 	GlobaRand = rand.New(rand.NewSource(time.Now().UnixNano()))
 }
+
+/**
+根据Java的LongTime生成一个时间
+longTime: Java的LongTime。如1551513615000=>2019-03-02 16:00:15 +0800 CST
+ */
+func NewTimeByJavaTimeLong(longTime int64) time.Time {
+	t := time.Unix(0, 0)
+	t = t.Add(time.Duration(longTime) * time.Millisecond)
+	return t
+}
+
+/**
+把时间转换成Java的LongTime
+ */
+func GetJavaTimeLong(t time.Time) int64 {
+	return t.Unix() * 1000
+}
+
+/**
+获取日期 格式为:yyyy-mm-dd
+ */
+func GetDate(t time.Time) string {
+	return t.Format("2006-01-02")
+}

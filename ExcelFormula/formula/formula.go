@@ -169,10 +169,10 @@ func (this *Node) makeNode(nodeType NodeType, value interface{}) *Node {
 	} else {
 		this.children = append(this.children, &node)
 	}
+
 	//100+300*200+500
 	if (this.children[0].nodeType == NodeTypeOperator) && (this.nodeType == NodeTypeOperator) {
 		if PRECEDENCE[this.value.(string)] > PRECEDENCE[this.children[0].value.(string)] {
-			//
 			node0_0 := this.children[0].children[0]
 			node0_1 := this.children[0].children[1]
 			node0 := this.children[0]

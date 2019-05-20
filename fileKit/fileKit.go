@@ -1,6 +1,8 @@
 package fileKit
 
-func CreateFile(c []byte, fileName string) error {
+import "os"
+
+func  CreateFile(c []byte, fileName string) error {
 	file, err := os.OpenFile(
 		fileName,
 		os.O_WRONLY|os.O_TRUNC|os.O_CREATE,
