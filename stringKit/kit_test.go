@@ -1,6 +1,34 @@
 package stringKit
 
-import "testing"
+import (
+	"fmt"
+	"strconv"
+	"testing"
+	"time"
+	"ttmyth123/kit/strconvEx"
+)
+
+func TestAA(t *testing.T) {
+
+	f := 1234.3
+	fmt.Println("a1:", fmt.Sprintf("%.2f", f))
+	fmt.Sprintf("")
+	a := strconv.FormatFloat(strconvEx.Decimal(f), 'G', 9, 32)
+
+	f = 1234.356
+	fmt.Println("a2:", fmt.Sprintf("%.2f", f))
+	a1 := strconv.FormatFloat(strconvEx.Decimal(f), 'G', 9, 32)
+
+	f = 1234000.3
+	fmt.Println("a2:", fmt.Sprintf("%.2f", f))
+	a2 := strconv.FormatFloat(strconvEx.Decimal(f), 'G', 9, 32)
+	f = 1234.33423
+	fmt.Println("a3:", fmt.Sprintf("%.2f", f))
+	a3 := strconv.FormatFloat(strconvEx.Decimal(f), 'G', 9, 32)
+
+	fmt.Println(a, a1, a2, a3) // 100.12
+
+}
 
 func TestGetBetweenStr(t *testing.T) {
 	s := ""
@@ -28,18 +56,30 @@ func TestGetBetweenStr(t *testing.T) {
 	//	t.Error("TestGetBetweenStr()不正确。")
 	//}
 
-
 	ss := `&amp;scid=&amp;cid=11149187&amp;game_type=LT&amp;wagers_class=wagers&amp;DATE_START=2019-04-15&amp;DATE_END=2019-04-21&amp;report_kind=A&amp;pay_type=&amp;bet_type=&amp;wtype=&amp;is_pay=&amp;lt_num=">313946.00</a>`
 	s = GetBetweenStr(ss, ";cid=", "&")
-	if s!="11149187" {
+	if s != "11149187" {
 		t.Error("TestGetBetweenStr()不正确。")
 	}
 
 	//ss = `
-    //            <a href="report_co.php?hall_id=&amp;scid=&amp;cid=11149187&amp;game_type=LT&amp;wagers_class=wagers&amp;DATE_START=2019-04-15&amp;DATE_END=2019-04-21&amp;report_kind=A&amp;pay_type=&amp;bet_type=&amp;wtype=&amp;is_pay=&amp;lt_num=">313946.00</a>
-    //          `
+	//            <a href="report_co.php?hall_id=&amp;scid=&amp;cid=11149187&amp;game_type=LT&amp;wagers_class=wagers&amp;DATE_START=2019-04-15&amp;DATE_END=2019-04-21&amp;report_kind=A&amp;pay_type=&amp;bet_type=&amp;wtype=&amp;is_pay=&amp;lt_num=">313946.00</a>
+	//          `
 	//s = GetBetweenStr(ss, "cid=", "&")
 	//if s!="11149187" {
 	//	t.Error("TestGetBetweenStr()不正确。")
 	//}
+}
+
+func TestGetNumGuid(t *testing.T) {
+
+	for i := 0; i < 1000; i++ {
+		go aaaGetNumGuid()
+	}
+	time.Sleep(time.Second * 100)
+}
+
+func aaaGetNumGuid() {
+	a := GetNumGuid(2)
+	fmt.Println(a)
 }

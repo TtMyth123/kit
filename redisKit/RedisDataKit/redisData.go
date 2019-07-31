@@ -6,6 +6,7 @@ import (
 )
 
 var (
+	mRedisData      *RedisData
 	mpRedisData sync.Map
 )
 
@@ -17,14 +18,25 @@ type RedisData struct {
 	初始化创建一个 RedisData
  */
 func IniNew(name, RedisIP, RedisPwd string, RedisDBIndex int) {
-	redisData := new(RedisData)
-	redisData.mClientredis = redis.NewClient(&redis.Options{
-		Addr:     RedisIP,
-		Password: RedisPwd,     // no password set
-		DB:       RedisDBIndex, // use default DB
+	mRedisData = new(RedisData)
+	mRedisData.mClientredis = redis.NewClient(&redis.Options{
+		Addr:    RedisIP,
+		Password: RedisPwd, // no password set
+		DB:       RedisDBIndex,                                    // use default DB
 	})
 
-	mpRedisData.Store(name, redisData)
+	//if _, ok := mpRedisData.Load(name); ok {
+	//	return
+	//}
+	//
+	//redisData := new(RedisData)
+	//redisData.mClientredis = redis.NewClient(&redis.Options{
+	//	Addr:     RedisIP,
+	//	Password: RedisPwd,     // no password set
+	//	DB:       RedisDBIndex, // use default DB
+	//})
+	//
+	//mpRedisData.Store(name, redisData)
 }
 
 /**
@@ -36,6 +48,8 @@ func DelRedisData(name string) {
 
 //获取 Redis 实例
 func GetRedisData(name string) *RedisData {
+	return mRedisData
+
 	if redisData, ok := mpRedisData.Load(name); ok {
 		aRedisData := redisData.(*RedisData)
 		return aRedisData
@@ -45,9 +59,13 @@ func GetRedisData(name string) *RedisData {
 
 //获取 Redis 实例
 func GetClientRedisP(name string) (*redis.Client) {
+	return mRedisData.mClientredis
+
 	if redisData, ok := mpRedisData.Load(name); ok {
 		aRedisData := redisData.(*RedisData)
 		return aRedisData.mClientredis
 	}
 	return nil
 }
+
+

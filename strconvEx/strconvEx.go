@@ -1,6 +1,10 @@
 package strconvEx
 
-import "strconv"
+import (
+	"fmt"
+	"math"
+	"strconv"
+)
 
 func StrTry2Int(str string, v int) int {
 	r, e := strconv.Atoi(str)
@@ -61,4 +65,15 @@ func StrTry2Float64(str string, v float64) float64 {
 		r = v
 	}
 	return r
+}
+
+const MIN = 0.000001
+
+func Float64IsEqual(f1, f2 float64) bool {
+	return math.Dim(f1, f2) < MIN
+}
+
+func Decimal(value float64) float64 {
+	value, _ = strconv.ParseFloat(fmt.Sprintf("%.2f", value), 64)
+	return value
 }

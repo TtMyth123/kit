@@ -60,5 +60,11 @@ func GetJavaTimeLong(t time.Time) int64 {
 获取日期 格式为:yyyy-mm-dd
  */
 func GetDate(t time.Time) string {
-	return t.Format("2006-01-02")
+	return t.Format(DateLayout)
+}
+
+const DateLayout = "2006-01-02"
+
+func GetDateForTime(strTime string) (time.Time, error) {
+	return time.Parse(DateLayout, strTime)
 }

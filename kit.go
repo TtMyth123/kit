@@ -143,6 +143,9 @@ func GetInterface2Float64(mp interface{}, k float64) float64 {
 	if r1, ok := mp.(float64); ok {
 		return r1
 	}
+	if r1, ok := mp.(float32); ok {
+		return float64(r1)
+	}
 	if r1, ok := mp.(int); ok {
 		return float64(r1)
 	}
@@ -150,6 +153,12 @@ func GetInterface2Float64(mp interface{}, k float64) float64 {
 		return float64(r1)
 	}
 	if r1, ok := mp.(float64); ok {
+		return float64(r1)
+	}
+	if r1, ok := mp.(int); ok {
+		return float64(r1)
+	}
+	if r1, ok := mp.(int32); ok {
 		return float64(r1)
 	}
 
