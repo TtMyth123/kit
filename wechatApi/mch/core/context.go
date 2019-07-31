@@ -3,7 +3,7 @@ package core
 import (
 	"net/http"
 
-	"ttmyth123/other/util"
+	"ttmyth123/kit/other/util"
 )
 
 const (
