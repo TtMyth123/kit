@@ -11,8 +11,8 @@ import (
 	"net/http"
 	"net/url"
 
-	"ttmyth123/other/util"
-	"ttmyth123/other/util/security"
+	"ttmyth123/kit/other/util"
+	"ttmyth123/kit/other/util/security"
 
 	"ttmyth123/kit/wechatApi/internal/debug/mch/callback"
 )

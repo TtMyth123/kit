@@ -13,7 +13,7 @@ import (
 	"os"
 	"unicode"
 
-	"ttmyth123/other/util"
+	"ttmyth123/kit/other/util"
 
 	"ttmyth123/kit/wechatApi/mch/core"
 	wechatutil "ttmyth123/kit/wechatApi/util"

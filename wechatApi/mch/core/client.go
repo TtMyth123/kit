@@ -11,7 +11,7 @@ import (
 	"strings"
 	"time"
 
-	"ttmyth123/other/util"
+	"ttmyth123/kit/other/util"
 
 	"ttmyth123/kit/wechatApi/internal/debug/mch/api"
 	wechatutil "ttmyth123/kit/wechatApi/util"

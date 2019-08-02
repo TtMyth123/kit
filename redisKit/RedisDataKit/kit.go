@@ -1,6 +1,9 @@
 package RedisDataKit
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"time"
+)
 
 func (this RedisData) Get(key string) string {
 	return this.mClientredis.Get(key).Val()
@@ -8,6 +11,9 @@ func (this RedisData) Get(key string) string {
 
 func (this RedisData) Set(key string, data string) error {
 	return this.mClientredis.Set(key, data, 0).Err()
+}
+func (this RedisData) SetByTime(key string, data string, expiration time.Duration) error {
+	return this.mClientredis.Set(key, data, expiration).Err()
 }
 
 func (this RedisData) Add2EnQueue(key string, data interface{}) error {

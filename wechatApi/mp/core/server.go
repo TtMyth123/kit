@@ -17,7 +17,7 @@ import (
 	"unicode"
 	"unsafe"
 
-	"ttmyth123/other/util/security"
+	"ttmyth123/kit/other/util/security"
 
 	"ttmyth123/kit/wechatApi/internal/debug/callback"
 	"ttmyth123/kit/wechatApi/internal/util"

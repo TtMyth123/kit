@@ -33,5 +33,5 @@ replace (
 
 require (
 	github.com/chanxuehong/rand v0.0.0-20180830053958-4b3aff17f488
-	ttmyth123/other/util v0.0.0-20181116100727-caf892acd09c
+	ttmyth123/kit/other/util v0.0.0-20181116100727-caf892acd09c
 )

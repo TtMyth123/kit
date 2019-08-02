@@ -130,3 +130,17 @@ func UnifiedOrder2(clt *core.Client, req *UnifiedOrderRequest) (resp *UnifiedOrd
 	}
 	return resp, nil
 }
+
+func NewJSAPIUnifiedOrderRequest(NotifyURL, Body, OutTradeNo, SpbillCreateIP, OpenId string, TotalFee int64) *UnifiedOrderRequest {
+	req := new(UnifiedOrderRequest)
+	req.Body = Body
+
+	req.OutTradeNo = OutTradeNo
+	req.TotalFee = TotalFee
+	req.SpbillCreateIP = SpbillCreateIP
+	req.NotifyURL = NotifyURL
+	req.TradeType = "JSAPI"
+	req.OpenId = OpenId
+
+	return req
+}
