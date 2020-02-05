@@ -23,20 +23,7 @@ func IniNew(name, RedisIP, RedisPwd string, RedisDBIndex int) {
 		Addr:    RedisIP,
 		Password: RedisPwd, // no password set
 		DB:       RedisDBIndex,                                    // use default DB
-	})
-
-	//if _, ok := mpRedisData.Load(name); ok {
-	//	return
-	//}
-	//
-	//redisData := new(RedisData)
-	//redisData.mClientredis = redis.NewClient(&redis.Options{
-	//	Addr:     RedisIP,
-	//	Password: RedisPwd,     // no password set
-	//	DB:       RedisDBIndex, // use default DB
-	//})
-	//
-	//mpRedisData.Store(name, redisData)
+	}) 
 }
 
 /**

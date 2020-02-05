@@ -27,6 +27,17 @@ func GetBetweenStr(strS, beginStr, endStr string) string {
 	}
 	return ""
 }
+func GetBetweenStrEx(strS, endStr, beginStr string) string {
+	eI := strings.Index(strS, endStr)
+	if eI >= 0 {
+		s1 := strS[:eI]
+		bI := strings.LastIndex(s1, beginStr)
+		if bI >= 0 {
+			return s1[bI+len(beginStr):]
+		}
+	}
+	return ""
+}
 
 func GetLaterStrLast(strS, beginStr string) string {
 	bI := strings.LastIndex(strS, beginStr)
@@ -58,6 +69,11 @@ func GetBeforeStr(strS, beginStr string) string {
 func GetJsonStr(data interface{}) string {
 	str, _ := json.Marshal(data)
 	return string(str)
+}
+func InitNumGuid(i int) {
+	numGuidLock.Lock()
+	defer numGuidLock.Unlock()
+	curI = i
 }
 
 func GetNumGuid(i int) string {

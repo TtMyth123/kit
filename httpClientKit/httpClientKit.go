@@ -3,6 +3,7 @@ package httpClientKit
 import (
 	"crypto/tls"
 	"fmt"
+	"golang.org/x/text/encoding/simplifiedchinese"
 	"io"
 	"io/ioutil"
 	"net"
@@ -11,7 +12,7 @@ import (
 	"net/url"
 	"strings"
 	"time"
-	"golang.org/x/text/encoding/simplifiedchinese"
+	"ttmyth123/kit"
 )
 
 type HandlerFunc_Response func(resp *http.Response)
@@ -21,26 +22,37 @@ type HttpClient struct {
 	gCurCookieJar *cookiejar.Jar
 	gCurCookies   []*http.Cookie
 	start         time.Time
+	Id            string
+}
+
+var timeout = 30
+
+func SetTimeut(t int) {
+	timeout = t
 }
 
 func GetHttpClient(guid string) *HttpClient {
 	tr := &http.Transport{
 		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
 		Dial: func(netw, addr string) (net.Conn, error) {
-			conn, err := net.DialTimeout(netw, addr, time.Second*15)
+			conn, err := net.DialTimeout(netw, addr, time.Second*time.Duration(timeout))
 			if err != nil {
 				return nil, err
 			}
-			conn.SetDeadline(time.Now().Add(time.Second * 15))
+			conn.SetDeadline(time.Now().Add(time.Second * time.Duration(timeout)))
 			return conn, nil
 		},
-		ResponseHeaderTimeout: time.Second * 15,
+		ResponseHeaderTimeout: time.Second * time.Duration(timeout),
 	}
 
 	client := &HttpClient{}
+	if guid == "" {
+		guid = kit.GetGuid()
+	}
 	client.client = &http.Client{Transport: tr}
 	//client.client = &http.Client{}
 	client.gCurCookieJar, _ = cookiejar.New(nil)
+	client.Id = guid
 
 	client.start = time.Now()
 	return client
@@ -50,32 +62,44 @@ func (this *HttpClient) Clear() {
 }
 func (this *HttpClient) GetString1(strUrl string) (string, error) {
 	resp, err := this.client.Get(strUrl)
+	if err != nil {
+		return "", err
+	}
 	aa := resp.Header.Get("Set-Cookie")
 	resp.Header.Get("")
 	aaa := resp.Cookies()
 	fmt.Println("Cookies:", aaa)
 	fmt.Println("Set-Cookie:", aa)
-
-	//urlX, _ := url.Parse("http://zhanzhang.baidu.com")
-	//j.SetCookies(urlX, clist)
-	//
-	//fmt.Printf("Jar cookie : %v", j.Cookies(urlX))
-	//
-	//fmt.Println("Set-Cookie11:", this.client.Jar)
-	//this.client.Jar.SetCookies()
-
-	//resp.Header.
+  
 	if err != nil {
 		return "", err
 	}
 
 	defer resp.Body.Close()
+	LoopI := 0
+LoopReadAll:
+	LoopI++
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
+		strE := err.Error()
+		if strings.Contains(strE, "timeout") && LoopI < 3 {
+			goto LoopReadAll
+		}
 		return "", err
 	}
 
 	return string(body), err
+}
+
+func (this *HttpClient) Get302Location(strUrl string) (string, error) {
+	u, _ := url.Parse(strUrl)
+	this.client.Jar = this.gCurCookieJar
+	resp, _ := this.client.Get(strUrl)
+	this.gCurCookies = this.gCurCookieJar.Cookies(u)
+	defer resp.Body.Close()
+	strLocation := resp.Request.Response.Header.Get("Location")
+
+	return strLocation, nil
 }
 
 func (this *HttpClient) GetString(strUrl string) (string, error) {
@@ -91,7 +115,7 @@ func (this *HttpClient) GetString(strUrl string) (string, error) {
 	LoopIA := 0
 LoopGet:
 	LoopIA++
-	LoopI++;
+	LoopI++
 	resp, err := this.client.Get(strUrl)
 	this.gCurCookies = this.gCurCookieJar.Cookies(u)
 
@@ -111,7 +135,7 @@ LoopReadAll:
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		strE := err.Error()
-		if strings.Contains(strE, "timeout") && LoopI < 4 {
+		if strings.Contains(strE, "timeout") && LoopI < 3 {
 			goto LoopReadAll
 		}
 
@@ -140,7 +164,7 @@ func (this *HttpClient) GetBytesEx(strUrl string) ([]byte, error) {
 	LoopIA := 0
 LoopGet:
 	LoopIA++
-	LoopI++;
+	LoopI++
 	resp, err := this.client.Get(strUrl)
 	this.gCurCookies = this.gCurCookieJar.Cookies(u)
 
@@ -161,7 +185,7 @@ LoopReadAll:
 
 	if err != nil {
 		strE := err.Error()
-		if strings.Contains(strE, "timeout") && LoopI < 4 {
+		if strings.Contains(strE, "timeout") && LoopI < 3 {
 			goto LoopReadAll
 		}
 
@@ -189,7 +213,17 @@ func (this *HttpClient) GetBytes(strUrl string) ([]byte, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	LoopI := 0
+LoopReadAll:
+	LoopI++
 	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		strE := err.Error()
+		if strings.Contains(strE, "timeout") && LoopI < 3 {
+			goto LoopReadAll
+		}
+		return body, err
+	}
 	return body, err
 }
 
@@ -210,8 +244,15 @@ func (this *HttpClient) GetStringCallBark(strUrl string, callBark HandlerFunc_Re
 	if callBark != nil {
 		callBark(resp)
 	}
+	LoopI := 0
+LoopReadAll:
+	LoopI++
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
+		strE := err.Error()
+		if strings.Contains(strE, "timeout") && LoopI < 3 {
+			goto LoopReadAll
+		}
 		return "", err
 	}
 	return string(body), err
@@ -265,14 +306,21 @@ func (this *HttpClient) GetHeader(strUrl string, paramsHeader map[string]string)
 		return nil, err
 	}
 	defer resp.Body.Close()
+	LoopI := 0
+LoopReadAll:
+	LoopI++
 	body, err := ioutil.ReadAll(resp.Body)
-
 	if err != nil {
-		return nil, err
+		strE := err.Error()
+		if strings.Contains(strE, "timeout") && LoopI < 3 {
+			goto LoopReadAll
+		}
+		return body, err
 	}
+
 	return body, err
 }
-  
+
 func (this *HttpClient) PostFormHeader(strUrl string, paramsHeader map[string]string, data url.Values) (string, error) {
 	u, err := url.Parse(strUrl)
 	if err != nil {
@@ -296,8 +344,16 @@ func (this *HttpClient) PostFormHeader(strUrl string, paramsHeader map[string]st
 		return "", err
 	}
 	defer resp.Body.Close()
+
+	LoopI := 0
+LoopReadAll:
+	LoopI++
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
+		strE := err.Error()
+		if strings.Contains(strE, "timeout") && LoopI < 3 {
+			goto LoopReadAll
+		}
 		return "", err
 	}
 	return string(body), err
@@ -314,24 +370,24 @@ func (this *HttpClient) PostFormCallBark(strUrl string, data url.Values, callBar
 	}
 
 	this.client.Jar = this.gCurCookieJar
-	//cost := time.Since(this.start)
-	//if cost < time.Millisecond*200 {
-	//	time.Sleep(time.Millisecond*200 - cost)
-	//}
 	resp, err := this.client.PostForm(strUrl, data)
-	//this.start = time.Now()
-
-	this.gCurCookies = this.gCurCookieJar.Cookies(u)
-
 	if err != nil {
 		return "", err
 	}
+	this.gCurCookies = this.gCurCookieJar.Cookies(u)
 	defer resp.Body.Close()
 	if callBark != nil {
 		callBark(resp)
 	}
+	LoopI := 0
+LoopReadAll:
+	LoopI++
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
+		strE := err.Error()
+		if strings.Contains(strE, "timeout") && LoopI < 3 {
+			goto LoopReadAll
+		}
 		return "", err
 	}
 	return string(body), err
@@ -352,6 +408,54 @@ func (this *HttpClient) PostJson(strUrl, strJsonData string) (string, error) {
 		return "", err
 	}
 	defer resp.Body.Close()
+	LoopI := 0
+LoopReadAll:
+	LoopI++
 	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		strE := err.Error()
+		if strings.Contains(strE, "timeout") && LoopI < 3 {
+			goto LoopReadAll
+		}
+		return "", err
+	}
 	return string(body), err
+}
+
+func (this *HttpClient) Post302LocationFormHeader(strUrl string, paramsHeader map[string]string, data url.Values) (string, string, error) {
+	u, err := url.Parse(strUrl)
+	if err != nil {
+		return "", "", err
+	}
+
+	req, _ := http.NewRequest("POST", strUrl, strings.NewReader(data.Encode()))
+	this.client.Jar = this.gCurCookieJar
+
+	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+	if paramsHeader != nil {
+		for k, v := range paramsHeader {
+			req.Header.Set(k, v)
+		}
+	}
+
+	resp, err := this.client.Do(req)
+	this.gCurCookies = this.gCurCookieJar.Cookies(u)
+
+	if err != nil {
+		return "", "", err
+	}
+	defer resp.Body.Close()
+
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return "", "", err
+	}
+
+	strLocation := ""
+	if resp.Request.Response != nil {
+		strLocation = resp.Request.Response.Header.Get("Location")
+	}
+
+	return string(body), strLocation, err
+
 }

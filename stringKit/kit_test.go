@@ -83,3 +83,18 @@ func aaaGetNumGuid() {
 	a := GetNumGuid(2)
 	fmt.Println(a)
 }
+
+func TestGetBetweenStr11(t *testing.T) {
+	s := `
+ <input type="hidden" id="goldidtmp" value="">
+
+		</table>
+	</div>
+	<input type="hidden" value="8XX6@85.9,6XX6@85.9" id="num_str" name="num_str">
+ <input type="hidden" id="goldidtmp" value="">
+ <input type="hidden" id="allsettmp" value="">
+ <input type="hidden" id="ptmp" value="">
+`
+	a:= GetBetweenStrEx(s, `" id="num_str" name="num_str"`,`value="`)
+	fmt.Println(a)
+}

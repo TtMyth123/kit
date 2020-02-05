@@ -31,3 +31,5 @@ func GetData(url string) ([]byte, error) {
 	_ = resp.Body.Close()
 	return body, err
 }
+
+ 
