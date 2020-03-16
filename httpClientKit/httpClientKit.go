@@ -23,6 +23,7 @@ type HttpClient struct {
 	gCurCookies   []*http.Cookie
 	start         time.Time
 	Id            string
+	RetryI int
 }
 
 var timeout = 30
@@ -82,7 +83,7 @@ LoopReadAll:
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		strE := err.Error()
-		if strings.Contains(strE, "timeout") && LoopI < 3 {
+		if strings.Contains(strE, "timeout") && LoopI < this.RetryI {
 			goto LoopReadAll
 		}
 		return "", err
@@ -121,7 +122,7 @@ LoopGet:
 
 	if err != nil {
 		strE := err.Error()
-		if strings.Contains(strE, "timeout") && LoopI < 4 {
+		if strings.Contains(strE, "timeout") && LoopI < this.RetryI {
 			goto LoopGet
 		}
 		fmt.Println(strE)
@@ -135,11 +136,11 @@ LoopReadAll:
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		strE := err.Error()
-		if strings.Contains(strE, "timeout") && LoopI < 3 {
+		if strings.Contains(strE, "timeout") && LoopI < this.RetryI {
 			goto LoopReadAll
 		}
 
-		if LoopIA < 3 {
+		if LoopIA < this.RetryI {
 			goto LoopGet
 		}
 
@@ -153,6 +154,7 @@ LoopReadAll:
 	}
 	return string(body), err
 }
+
 func (this *HttpClient) GetBytesEx(strUrl string) ([]byte, error) {
 	LoopI := 0
 	u, err := url.Parse(strUrl)
@@ -170,7 +172,7 @@ LoopGet:
 
 	if err != nil {
 		strE := err.Error()
-		if strings.Contains(strE, "timeout") && LoopI < 4 {
+		if strings.Contains(strE, "timeout") && LoopI < this.RetryI {
 			goto LoopGet
 		}
 		fmt.Println(strE)
@@ -185,11 +187,11 @@ LoopReadAll:
 
 	if err != nil {
 		strE := err.Error()
-		if strings.Contains(strE, "timeout") && LoopI < 3 {
+		if strings.Contains(strE, "timeout") && LoopI < this.RetryI {
 			goto LoopReadAll
 		}
 
-		if LoopIA < 3 {
+		if LoopIA < this.RetryI {
 			goto LoopGet
 		}
 
@@ -219,7 +221,7 @@ LoopReadAll:
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		strE := err.Error()
-		if strings.Contains(strE, "timeout") && LoopI < 3 {
+		if strings.Contains(strE, "timeout") && LoopI < this.RetryI {
 			goto LoopReadAll
 		}
 		return body, err
@@ -250,7 +252,7 @@ LoopReadAll:
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		strE := err.Error()
-		if strings.Contains(strE, "timeout") && LoopI < 3 {
+		if strings.Contains(strE, "timeout") && LoopI < this.RetryI {
 			goto LoopReadAll
 		}
 		return "", err
@@ -312,7 +314,7 @@ LoopReadAll:
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		strE := err.Error()
-		if strings.Contains(strE, "timeout") && LoopI < 3 {
+		if strings.Contains(strE, "timeout") && LoopI < this.RetryI {
 			goto LoopReadAll
 		}
 		return body, err
@@ -351,7 +353,7 @@ LoopReadAll:
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		strE := err.Error()
-		if strings.Contains(strE, "timeout") && LoopI < 3 {
+		if strings.Contains(strE, "timeout") && LoopI < this.RetryI {
 			goto LoopReadAll
 		}
 		return "", err
@@ -385,7 +387,7 @@ LoopReadAll:
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		strE := err.Error()
-		if strings.Contains(strE, "timeout") && LoopI < 3 {
+		if strings.Contains(strE, "timeout") && LoopI < this.RetryI {
 			goto LoopReadAll
 		}
 		return "", err
@@ -414,7 +416,7 @@ LoopReadAll:
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		strE := err.Error()
-		if strings.Contains(strE, "timeout") && LoopI < 3 {
+		if strings.Contains(strE, "timeout") && LoopI < this.RetryI {
 			goto LoopReadAll
 		}
 		return "", err

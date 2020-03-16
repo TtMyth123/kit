@@ -66,5 +66,8 @@ func GetDate(t time.Time) string {
 const DateLayout = "2006-01-02"
 
 func GetDateForTime(strTime string) (time.Time, error) {
-	return time.Parse(DateLayout, strTime)
+	return time.ParseInLocation(DateLayout, strTime,time.Local)
+}
+func GetTime(strTime string) (time.Time, error)  {
+	return time.ParseInLocation("2006-01-02 15:04:05", strTime,time.Local)
 }

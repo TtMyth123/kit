@@ -22,6 +22,7 @@ func InitLogs() {
 	consoleLogs.SetLogger(logs.AdapterConsole)
 	consoleLogs.Async() //异步
 	consoleLogs.EnableFuncCallDepth(true)
+	consoleLogs.SetLogFuncCallDepth(4)
 	fileLogs = logs.NewLogger(10000)
 
 	level := beego.AppConfig.String("logs::level")
