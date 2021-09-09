@@ -145,7 +145,7 @@ func (srv *DefaultAccessTokenServer) updateToken(currentToken string) (token *ac
 
 	if httpResp.StatusCode != http.StatusOK {
 		atomic.StorePointer(&srv.tokenCache, nil)
-		err = fmt.Errorf("http.Status: %s", httpResp.Status)
+		err = fmt.Errorf("http.GetSystemStatus: %s", httpResp.Status)
 		return
 	}
 

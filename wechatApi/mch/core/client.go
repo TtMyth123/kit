@@ -172,7 +172,7 @@ func (clt *Client) postXML(url string, body []byte, reqSignType string) (resp ma
 	defer httpResp.Body.Close()
 
 	if httpResp.StatusCode != http.StatusOK {
-		return nil, true, fmt.Errorf("http.Status: %s", httpResp.Status)
+		return nil, true, fmt.Errorf("http.GetSystemStatus: %s", httpResp.Status)
 	}
 
 	resp, err = api.DecodeXMLHttpResponse(httpResp.Body)

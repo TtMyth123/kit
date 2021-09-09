@@ -49,7 +49,7 @@ func DownloadToWriter(ticket string, writer io.Writer, clt *http.Client) (writte
 	defer httpResp.Body.Close()
 
 	if httpResp.StatusCode != http.StatusOK {
-		err = fmt.Errorf("http.Status: %s", httpResp.Status)
+		err = fmt.Errorf("http.GetSystemStatus: %s", httpResp.Status)
 		return
 	}
 

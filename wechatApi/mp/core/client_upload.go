@@ -123,7 +123,7 @@ func httpPostMultipartForm(clt *http.Client, url, bodyType string, body []byte, 
 	defer httpResp.Body.Close()
 
 	if httpResp.StatusCode != http.StatusOK {
-		return fmt.Errorf("http.Status: %s", httpResp.Status)
+		return fmt.Errorf("http.GetSystemStatus: %s", httpResp.Status)
 	}
 	return api.DecodeJSONHttpResponse(httpResp.Body, response)
 }

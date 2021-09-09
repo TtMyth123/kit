@@ -6,6 +6,7 @@ import (
 	"github.com/astaxie/beego/logs"
 	"runtime"
 	"strings"
+	"strconv"
 )
 
 // consoleLogs开发模式下日志
@@ -18,31 +19,50 @@ var fileLogs *logs.BeeLogger
 var runmode string
 
 func InitLogs() {
+	level := beego.AppConfig.String("logs::level")
+	iLevel,_ := beego.AppConfig.Int("logs::level")
+
 	consoleLogs = logs.NewLogger(1)
 	consoleLogs.SetLogger(logs.AdapterConsole)
 	consoleLogs.Async() //异步
 	consoleLogs.EnableFuncCallDepth(true)
 	consoleLogs.SetLogFuncCallDepth(4)
-	fileLogs = logs.NewLogger(10000)
-
-	level := beego.AppConfig.String("logs::level")
-
-	iLevel,_ := beego.AppConfig.Int("logs::level")
-
 	consoleLogs.SetLevel(iLevel)
-	//fileLogs.SetLevel(level)
-	//fileLogs.SetLogger(logs.AdapterMultiFile, `{"filename":"logs/rms.log",
-	//	"separate":["emergency", "alert", "critical", "error", "warning", "notice", "info", "debug"],
-	//	"level":`+level+`,
-	//	"daily":true,
-	//	"maxdays":10}`)
+
+	fileLogs = logs.NewLogger(10000)
+ 	fileLogs.SetLogger(logs.AdapterMultiFile, `{"filename":"logs/rms.log",
+		"separate":["emergency", "alert", "critical", "error", "warning", "notice", "info", "debug"],
+		"level":`+level+`,
+		"daily":true,
+		"maxdays":2}`)
+	fileLogs.SetLevel(iLevel)
+	fileLogs.Async() //异步
+	runmode = strings.TrimSpace(strings.ToLower(beego.AppConfig.String("runmode")))
+
+	if runmode == "" {
+		runmode = "dev"
+	}
+}
+func InitLogs1(iLevel int) {
+	level :=strconv.Itoa(iLevel)
+
+	consoleLogs = logs.NewLogger(1)
+	consoleLogs.SetLogger(logs.AdapterConsole)
+	consoleLogs.Async() //异步
+	consoleLogs.EnableFuncCallDepth(true)
+	consoleLogs.SetLogFuncCallDepth(4)
+	consoleLogs.SetLevel(iLevel)
+
+	fileLogs = logs.NewLogger(10000)
 	fileLogs.SetLogger(logs.AdapterMultiFile, `{"filename":"logs/rms.log",
 		"separate":["emergency", "alert", "critical", "error", "warning", "notice", "info", "debug"],
 		"level":`+level+`,
 		"daily":true,
-		"maxdays":10}`)
+		"maxdays":2}`)
+	fileLogs.SetLevel(iLevel)
 	fileLogs.Async() //异步
 	runmode = strings.TrimSpace(strings.ToLower(beego.AppConfig.String("runmode")))
+
 	if runmode == "" {
 		runmode = "dev"
 	}

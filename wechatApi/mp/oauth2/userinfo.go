@@ -67,7 +67,7 @@ func GetUserInfo(accessToken, openId, lang string, httpClient *http.Client) (inf
 	defer httpResp.Body.Close()
 
 	if httpResp.StatusCode != http.StatusOK {
-		err = fmt.Errorf("http.Status: %s", httpResp.Status)
+		err = fmt.Errorf("http.GetSystemStatus: %s", httpResp.Status)
 		return
 	}
 

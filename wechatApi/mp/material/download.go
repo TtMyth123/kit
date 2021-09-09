@@ -114,7 +114,7 @@ func httpDownloadToWriter(clt *http.Client, url string, body []byte, buf []byte,
 	defer httpResp.Body.Close()
 
 	if httpResp.StatusCode != http.StatusOK {
-		return 0, fmt.Errorf("http.Status: %s", httpResp.Status)
+		return 0, fmt.Errorf("http.GetSystemStatus: %s", httpResp.Status)
 	}
 
 	buf2 := buf // 保存预先读取的少量头部信息

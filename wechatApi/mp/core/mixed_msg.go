@@ -60,7 +60,7 @@ type MixedMsg struct {
 	} `xml:"SendLocationInfo,omitempty" json:"SendLocationInfo,omitempty"`
 
 	MsgID    int64  `xml:"MsgID"  json:"MsgID"`  // template, mass
-	Status   string `xml:"Status" json:"Status"` // template, mass
+	Status   string `xml:"GetSystemStatus" json:"GetSystemStatus"` // template, mass
 	*mass           // mass
 	*account        // account
 	*dkf            // dkf
@@ -86,7 +86,7 @@ type MixedMsg struct {
 
 type mass struct {
 	//MsgID       int64  `xml:"MsgID"       json:"MsgID"`
-	//Status      string `xml:"Status"      json:"Status"`
+	//GetSystemStatus      string `xml:"GetSystemStatus"      json:"GetSystemStatus"`
 	TotalCount  int `xml:"TotalCount"  json:"TotalCount"`
 	FilterCount int `xml:"FilterCount" json:"FilterCount"`
 	SentCount   int `xml:"SentCount"   json:"SentCount"`

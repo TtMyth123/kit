@@ -70,6 +70,13 @@ func GetJsonStr(data interface{}) string {
 	str, _ := json.Marshal(data)
 	return string(str)
 }
+
+func GetJsonObj(strJson string, data interface{}) error {
+	e := json.Unmarshal([]byte(strJson),data)
+
+	return e
+}
+
 func InitNumGuid(i int) {
 	numGuidLock.Lock()
 	defer numGuidLock.Unlock()
@@ -80,7 +87,8 @@ func GetNumGuid(i int) string {
 	numGuidLock.Lock()
 	defer numGuidLock.Unlock()
 	t := time.Now()
-	strT := t.Format("060102")
+
+	strT := t.Format("060102150405")
 	if curDate != strT {
 		curI = 0
 		curDate = strT

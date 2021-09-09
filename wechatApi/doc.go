@@ -1,2 +1,2 @@
-// https://ttmyth123/kit/wechatApi
+// https://kit/wechatApi
 package wechat

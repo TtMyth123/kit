@@ -89,7 +89,7 @@ func httpDownloadToWriter(clt *http.Client, url string, writer io.Writer, errorR
 	defer httpResp.Body.Close()
 
 	if httpResp.StatusCode != http.StatusOK {
-		return 0, fmt.Errorf("http.Status: %s", httpResp.Status)
+		return 0, fmt.Errorf("http.GetSystemStatus: %s", httpResp.Status)
 	}
 
 	ContentDisposition := httpResp.Header.Get("Content-Disposition")

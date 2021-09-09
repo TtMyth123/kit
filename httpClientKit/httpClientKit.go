@@ -13,6 +13,7 @@ import (
 	"strings"
 	"time"
 	"ttmyth123/kit"
+	"ttmyth123/kit/httpKit"
 )
 
 type HandlerFunc_Response func(resp *http.Response)
@@ -24,6 +25,7 @@ type HttpClient struct {
 	start         time.Time
 	Id            string
 	RetryI int
+	isBusy bool
 }
 
 var timeout = 30
@@ -31,7 +33,13 @@ var timeout = 30
 func SetTimeut(t int) {
 	timeout = t
 }
+func (this *HttpClient) GetBusyStatus()bool {
+	return this.isBusy
+}
 
+func (this *HttpClient) setBusyStatus(b  bool) {
+	this.isBusy = b
+}
 func GetHttpClient(guid string) *HttpClient {
 	tr := &http.Transport{
 		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
@@ -62,6 +70,8 @@ func (this *HttpClient) Clear() {
 	this.gCurCookieJar, _ = cookiejar.New(nil)
 }
 func (this *HttpClient) GetString1(strUrl string) (string, error) {
+	this.isBusy = true
+	defer this.setBusyStatus(false)
 	resp, err := this.client.Get(strUrl)
 	if err != nil {
 		return "", err
@@ -93,6 +103,9 @@ LoopReadAll:
 }
 
 func (this *HttpClient) Get302Location(strUrl string) (string, error) {
+	this.isBusy = true
+	defer this.setBusyStatus(false)
+
 	u, _ := url.Parse(strUrl)
 	this.client.Jar = this.gCurCookieJar
 	resp, _ := this.client.Get(strUrl)
@@ -104,6 +117,8 @@ func (this *HttpClient) Get302Location(strUrl string) (string, error) {
 }
 
 func (this *HttpClient) GetString(strUrl string) (string, error) {
+	this.isBusy = true
+	defer this.setBusyStatus(false)
 
 	LoopI := 0
 	//time.Sleep(time.Millisecond * 200)
@@ -155,7 +170,17 @@ LoopReadAll:
 	return string(body), err
 }
 
+func (this *HttpClient) GetStringParam(strUrl string,param map[string]interface{}) (string, error) {
+	newUrl,_ := httpKit.GetUrl(strUrl,param)
+
+	return this.GetString(newUrl)
+}
+
+
 func (this *HttpClient) GetBytesEx(strUrl string) ([]byte, error) {
+	this.isBusy = true
+	defer this.setBusyStatus(false)
+
 	LoopI := 0
 	u, err := url.Parse(strUrl)
 	if err != nil {
@@ -202,6 +227,9 @@ LoopReadAll:
 }
 
 func (this *HttpClient) GetBytes(strUrl string) ([]byte, error) {
+	this.isBusy = true
+	defer this.setBusyStatus(false)
+
 	u, err := url.Parse(strUrl)
 	if err != nil {
 		return nil, err
@@ -230,6 +258,9 @@ LoopReadAll:
 }
 
 func (this *HttpClient) GetStringCallBark(strUrl string, callBark HandlerFunc_Response) (string, error) {
+	this.isBusy = true
+	defer this.setBusyStatus(false)
+
 	u, err := url.Parse(strUrl)
 	if err != nil {
 		return "", err
@@ -261,6 +292,9 @@ LoopReadAll:
 }
 
 func (this *HttpClient) DoRequest(method, strUrl string, paramsHeader map[string]string, data io.Reader) ([]byte, error) {
+	this.isBusy = true
+	defer this.setBusyStatus(false)
+
 	u, err := url.Parse(strUrl)
 	if err != nil {
 		return nil, err
@@ -287,7 +321,11 @@ func (this *HttpClient) DoRequest(method, strUrl string, paramsHeader map[string
 	return body, err
 }
 
+
 func (this *HttpClient) GetHeader(strUrl string, paramsHeader map[string]string) ([]byte, error) {
+	this.isBusy = true
+	defer this.setBusyStatus(false)
+
 	u, err := url.Parse(strUrl)
 	if err != nil {
 		return nil, err
@@ -324,6 +362,9 @@ LoopReadAll:
 }
 
 func (this *HttpClient) PostFormHeader(strUrl string, paramsHeader map[string]string, data url.Values) (string, error) {
+	this.isBusy = true
+	defer this.setBusyStatus(false)
+
 	u, err := url.Parse(strUrl)
 	if err != nil {
 		return "", err
@@ -366,6 +407,9 @@ func (this *HttpClient) PostForm(strUrl string, data url.Values) (string, error)
 }
 
 func (this *HttpClient) PostFormCallBark(strUrl string, data url.Values, callBark HandlerFunc_Response) (string, error) {
+	this.isBusy = true
+	defer this.setBusyStatus(false)
+
 	u, err := url.Parse(strUrl)
 	if err != nil {
 		return "", err
@@ -396,6 +440,9 @@ LoopReadAll:
 }
 
 func (this *HttpClient) PostJson(strUrl, strJsonData string) (string, error) {
+	this.isBusy = true
+	defer this.setBusyStatus(false)
+
 	u, err := url.Parse(strUrl)
 	if err != nil {
 		return "", err
@@ -425,6 +472,9 @@ LoopReadAll:
 }
 
 func (this *HttpClient) Post302LocationFormHeader(strUrl string, paramsHeader map[string]string, data url.Values) (string, string, error) {
+	this.isBusy = true
+	defer this.setBusyStatus(false)
+
 	u, err := url.Parse(strUrl)
 	if err != nil {
 		return "", "", err

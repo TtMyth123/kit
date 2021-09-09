@@ -94,7 +94,7 @@ func httpGetJSON(clt *http.Client, url string, response interface{}) error {
 	defer httpResp.Body.Close()
 
 	if httpResp.StatusCode != http.StatusOK {
-		return fmt.Errorf("http.Status: %s", httpResp.Status)
+		return fmt.Errorf("http.GetSystemStatus: %s", httpResp.Status)
 	}
 	return api.DecodeJSONHttpResponse(httpResp.Body, response)
 }
@@ -175,7 +175,7 @@ func httpPostJSON(clt *http.Client, url string, body []byte, response interface{
 	defer httpResp.Body.Close()
 
 	if httpResp.StatusCode != http.StatusOK {
-		return fmt.Errorf("http.Status: %s", httpResp.Status)
+		return fmt.Errorf("http.GetSystemStatus: %s", httpResp.Status)
 	}
 	return api.DecodeJSONHttpResponse(httpResp.Body, response)
 }

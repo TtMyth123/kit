@@ -6,14 +6,13 @@ import (
 	"reflect"
 	"strconv"
 	"time"
-	"ttmyth123/kit/gtLog"
 )
 
 func MapFillStruct(s interface{}, m map[string]interface{}) error {
 	for k, v := range m {
 		err := SetField(s, k, v)
 		if err != nil {
-			gtLog.Log(gtLog.Warn, "FillStruct出错", k, v)
+
 		}
 	}
 	return nil

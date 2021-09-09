@@ -1,2 +1,2 @@
-// see ttmyth123/kit/wechatApi/mp/datacube
+// see kit/wechatApi/mp/datacube
 package datacube

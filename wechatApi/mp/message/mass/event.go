@@ -27,7 +27,7 @@ type MassSendJobFinishEvent struct {
 	// err(20013), //涉嫌版权
 	// err(22000), //涉嫌互推(互相宣传)
 	// err(21000), //涉嫌其他
-	Status     string `xml:"Status"     json:"Status"`
+	Status     string `xml:"GetSystemStatus"     json:"GetSystemStatus"`
 	TotalCount int    `xml:"TotalCount" json:"TotalCount"` // group_id 下粉丝数, 或者 openid_list 中的粉丝数
 	// 过滤(过滤是指特定地区, 性别的过滤, 用户设置拒收的过滤; 用户接收已超4条的过滤)后,
 	// 准备发送的粉丝数, 原则上, FilterCount = SentCount + ErrorCount

@@ -65,7 +65,7 @@ func getSession(session *Session, url string, httpClient *http.Client) (err erro
 	defer httpResp.Body.Close()
 
 	if httpResp.StatusCode != http.StatusOK {
-		return fmt.Errorf("http.Status: %s", httpResp.Status)
+		return fmt.Errorf("http.GetSystemStatus: %s", httpResp.Status)
 	}
 
 	var result struct {

@@ -132,7 +132,7 @@ func downloadBillToWriter(clt *core.Client, writer io.Writer, req *DownloadBillR
 	defer httpResp.Body.Close()
 
 	if httpResp.StatusCode != http.StatusOK {
-		err = fmt.Errorf("http.Status: %s", httpResp.Status)
+		err = fmt.Errorf("http.GetSystemStatus: %s", httpResp.Status)
 		return 0, err
 	}
 

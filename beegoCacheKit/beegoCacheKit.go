@@ -10,7 +10,14 @@ import (
 	"time"
 )
 
-const Timeout8  = 3600*24*365*10
+const Timeout8 = 3600 * 24 * 365 * 10
+const (
+	TimeoutOneMinute = 60                  //一分钟
+	TimeoutOneHour   = 3600                //一小时
+	TimeoutOneDay    = TimeoutOneHour * 24 //一天
+	TimeoutOneWeek   = TimeoutOneDay * 7   //一周
+	TimeoutOneYear   = TimeoutOneDay * 365 //一年
+)
 var
 (
 	mpBeegoCache map[string]*BeegoCache
@@ -63,7 +70,12 @@ func (this *BeegoCache) SetCache(key string, value interface{}, timeout int) err
 			this.cc = nil
 		}
 	}()
+	if timeout==0 {
+		timeout= 20000
+	}
 	timeouts := time.Duration(timeout) * time.Second
+
+
 	err = this.cc.Put(key, data, timeouts)
 	if err != nil {
 		return err
@@ -118,6 +130,54 @@ func (this *BeegoCache) DelCache(key string) error {
 		return nil
 	}
 }
+
+
+//func (this *BeegoCache) Incr(key string) error {
+//	key = this.name + key
+//	err := this.cc.Incr(key)
+//	if err != nil {
+//		return errors.New("Cache Incr")
+//	} else {
+//		return nil
+//	}
+//}
+//func (this *BeegoCache) GetInt(key string) int {
+//	key = this.name + key
+//	if this.cc == nil {
+//		return 0
+//	}
+//	if v,ok := this.cc.Get(key).([]int);ok {
+//		if len(v)>0 {
+//			return v[0]
+//		}
+//	} else {
+//		intV := kit.GetInterface2Int(v,0)
+//
+//		return intV
+//	}
+//	return 0
+//}
+//
+//func (this *BeegoCache) Decr(key string) error {
+//	key = this.name + key
+//
+//	if this.cc == nil {
+//		return errors.New("cc is nil")
+//	}
+//	defer func() {
+//		if r := recover(); r != nil {
+//			//fmt.Println("get cache error caught: %v\n", r)
+//			this.cc = nil
+//		}
+//	}()
+//	err := this.cc.Decr(key)
+//	if err != nil {
+//		return errors.New("Cache Incr")
+//	} else {
+//		return nil
+//	}
+//}
+
 
 // Encode
 // 用gob进行数据编码

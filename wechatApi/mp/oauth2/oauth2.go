@@ -42,7 +42,7 @@ func Auth(accessToken, openId string, httpClient *http.Client) (valid bool, err 
 	defer httpResp.Body.Close()
 
 	if httpResp.StatusCode != http.StatusOK {
-		err = fmt.Errorf("http.Status: %s", httpResp.Status)
+		err = fmt.Errorf("http.GetSystemStatus: %s", httpResp.Status)
 		return
 	}
 

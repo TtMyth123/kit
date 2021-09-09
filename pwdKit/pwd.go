@@ -1,10 +1,12 @@
 package pwdKit
 
 import (
+	"crypto/hmac"
 	"crypto/md5"
 	"crypto/sha1"
 	"crypto/sha256"
 	"encoding/base64"
+	"encoding/hex"
 	"errors"
 	"io"
 )
@@ -27,6 +29,13 @@ func Sha256ToStr(pwd string) string {
 	io.WriteString(h, pwd)
 	newPwd := base64.StdEncoding.EncodeToString(h.Sum(nil))
 	return newPwd
+}
+func HmacSha256(message string, secret string) string{
+	key := []byte(secret)
+	h := hmac.New(sha256.New, key)
+	h.Write([]byte(message))
+	sha := hex.EncodeToString(h.Sum(nil))
+	 return sha
 }
 
 /**

@@ -59,7 +59,7 @@ func (this *TtBaseController) JsonDatatablesResult(Page, OnePageCount, Total int
 	this.StopRun()
 }
 func (this *TtBaseController) Logout(name string) {
-	Id, _ := this.GetInt("UserId", 0)
+	Id, _ := this.GetInt("WalletId", 0)
 	SID := this.GetString("SID")
 	key := fmt.Sprintf("%d_%s_%s", Id, SID, name)
 	cache.DelCache(key);
@@ -72,7 +72,7 @@ func (this *TtBaseController) RedirectTt(url string) {
 	this.StopRun()
 }
 func (this *TtBaseController) GetTtSession(name string) interface{} {
-	Id, _ := this.GetInt("UserId", 0)
+	Id, _ := this.GetInt("WalletId", 0)
 	SID := this.GetString("SID")
 
 	key := fmt.Sprintf("%d_%s_%s", Id, SID, name)
@@ -88,7 +88,7 @@ func (this *TtBaseController) GetTtSession(name string) interface{} {
 }
 
 func (this *TtBaseController) SetTtSession(name string, v interface{}) {
-	Id, _ := this.GetInt("UserId", 0)
+	Id, _ := this.GetInt("WalletId", 0)
 	SID := this.GetString("SID")
 
 	key := fmt.Sprintf("%d_%s_%s", Id, SID, name)
