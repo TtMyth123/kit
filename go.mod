@@ -15,3 +15,5 @@ require (
 	github.com/xuri/efp v0.0.0-20210322160811-ab561f5b45e3
 	golang.org/x/text v0.3.6
 )
+
+replace ttmyth123/kit => D:\work\go\WorkSpace\src\ttmyth123\kit
