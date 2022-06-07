@@ -9,8 +9,8 @@ import (
 	"strconv"
 	"strings"
 
-	f1F "ttmyth123/kit/ExcelFormula/formula"
-	funs "ttmyth123/kit/ExcelFormula/funs"
+	f1F "github.com/TtMyth123/kit/ExcelFormula/formula"
+	funs "github.com/TtMyth123/kit/ExcelFormula/funs"
 
 	"github.com/golang-collections/collections/stack"
 	"github.com/tealeg/xlsx"

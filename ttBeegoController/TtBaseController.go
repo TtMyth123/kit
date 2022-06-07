@@ -2,12 +2,12 @@ package ttBeegoController
 
 import (
 	"fmt"
+	"github.com/TtMyth123/kit/sqlKit"
+	"github.com/TtMyth123/kit/ttBeegoController/base/Result"
+	"github.com/TtMyth123/kit/ttBeegoController/base/enums"
+	"github.com/TtMyth123/kit/ttBeegoController/cache"
 	"github.com/astaxie/beego"
 	"strings"
-	"ttmyth123/kit/sqlKit"
-	"ttmyth123/kit/ttBeegoController/base/Result"
-	"ttmyth123/kit/ttBeegoController/base/enums"
-	"ttmyth123/kit/ttBeegoController/cache"
 )
 
 type TtBaseController struct {
@@ -51,7 +51,7 @@ func (this *TtBaseController) JsonDataGridResult(Total int64, Rows interface{}) 
 }
 
 func (this *TtBaseController) JsonDatatablesResult(Page, OnePageCount, Total int, Rows interface{}) {
-	_ ,Pages:= sqlKit.GetOffset(Total, OnePageCount, Page)
+	_, Pages := sqlKit.GetOffset(Total, OnePageCount, Page)
 	aMetaInfo := Result.MetaInfo{Page: Page, Pages: Pages, Perpage: OnePageCount, Total: Total}
 	res := &Result.JsonDatatablesResult{Meta: aMetaInfo, Data: Rows}
 	this.Data["json"] = res
@@ -62,8 +62,8 @@ func (this *TtBaseController) Logout(name string) {
 	Id, _ := this.GetInt("WalletId", 0)
 	SID := this.GetString("SID")
 	key := fmt.Sprintf("%d_%s_%s", Id, SID, name)
-	cache.DelCache(key);
-	this.DelSession(name);
+	cache.DelCache(key)
+	this.DelSession(name)
 }
 
 // 重定向

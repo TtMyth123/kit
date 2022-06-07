@@ -3,6 +3,8 @@ package httpClientKit
 import (
 	"crypto/tls"
 	"fmt"
+	"github.com/TtMyth123/kit"
+	"github.com/TtMyth123/kit/httpKit"
 	"golang.org/x/text/encoding/simplifiedchinese"
 	"io"
 	"io/ioutil"
@@ -12,8 +14,6 @@ import (
 	"net/url"
 	"strings"
 	"time"
-	"ttmyth123/kit"
-	"ttmyth123/kit/httpKit"
 )
 
 type HandlerFunc_Response func(resp *http.Response)
@@ -24,8 +24,8 @@ type HttpClient struct {
 	gCurCookies   []*http.Cookie
 	start         time.Time
 	Id            string
-	RetryI int
-	isBusy bool
+	RetryI        int
+	isBusy        bool
 }
 
 var timeout = 30
@@ -33,11 +33,11 @@ var timeout = 30
 func SetTimeut(t int) {
 	timeout = t
 }
-func (this *HttpClient) GetBusyStatus()bool {
+func (this *HttpClient) GetBusyStatus() bool {
 	return this.isBusy
 }
 
-func (this *HttpClient) setBusyStatus(b  bool) {
+func (this *HttpClient) setBusyStatus(b bool) {
 	this.isBusy = b
 }
 func GetHttpClient(guid string) *HttpClient {
@@ -81,7 +81,7 @@ func (this *HttpClient) GetString1(strUrl string) (string, error) {
 	aaa := resp.Cookies()
 	fmt.Println("Cookies:", aaa)
 	fmt.Println("Set-Cookie:", aa)
-  
+
 	if err != nil {
 		return "", err
 	}
@@ -170,12 +170,11 @@ LoopReadAll:
 	return string(body), err
 }
 
-func (this *HttpClient) GetStringParam(strUrl string,param map[string]interface{}) (string, error) {
-	newUrl,_ := httpKit.GetUrl(strUrl,param)
+func (this *HttpClient) GetStringParam(strUrl string, param map[string]interface{}) (string, error) {
+	newUrl, _ := httpKit.GetUrl(strUrl, param)
 
 	return this.GetString(newUrl)
 }
-
 
 func (this *HttpClient) GetBytesEx(strUrl string) ([]byte, error) {
 	this.isBusy = true
@@ -320,7 +319,6 @@ func (this *HttpClient) DoRequest(method, strUrl string, paramsHeader map[string
 
 	return body, err
 }
-
 
 func (this *HttpClient) GetHeader(strUrl string, paramsHeader map[string]string) ([]byte, error) {
 	this.isBusy = true

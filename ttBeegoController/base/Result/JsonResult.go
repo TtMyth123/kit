@@ -1,7 +1,7 @@
 package Result
 
 import (
-	"ttmyth123/kit/ttBeegoController/base/enums"
+	"github.com/TtMyth123/kit/ttBeegoController/base/enums"
 )
 
 type JsonResult struct {
@@ -9,5 +9,3 @@ type JsonResult struct {
 	Msg  string               `json:"msg"`
 	Obj  interface{}          `json:"obj"`
 }
-
-

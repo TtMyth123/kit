@@ -3,8 +3,8 @@ package funs
 import (
 	"errors"
 	"fmt"
+	"github.com/TtMyth123/kit/ExcelFormula/funs/k"
 	"strconv"
-	"ttmyth123/kit/ExcelFormula/funs/k"
 )
 
 func RIGHT1(input interface{}) (string, error) {

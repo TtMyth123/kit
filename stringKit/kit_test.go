@@ -2,10 +2,10 @@ package stringKit
 
 import (
 	"fmt"
+	"github.com/ttmyth123/kit/strconvEx"
 	"strconv"
 	"testing"
 	"time"
-	"ttmyth123/kit/strconvEx"
 )
 
 func TestAA(t *testing.T) {
@@ -95,6 +95,6 @@ func TestGetBetweenStr11(t *testing.T) {
  <input type="hidden" id="allsettmp" value="">
  <input type="hidden" id="ptmp" value="">
 `
-	a:= GetBetweenStrEx(s, `" id="num_str" name="num_str"`,`value="`)
+	a := GetBetweenStrEx(s, `" id="num_str" name="num_str"`, `value="`)
 	fmt.Println(a)
 }

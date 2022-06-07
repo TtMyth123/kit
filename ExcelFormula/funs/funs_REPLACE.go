@@ -3,8 +3,8 @@ package funs
 import (
 	"errors"
 	"fmt"
+	"github.com/TtMyth123/kit/ExcelFormula/funs/k"
 	"strconv"
-	"ttmyth123/kit/ExcelFormula/funs/k"
 )
 
 func REPLACE4(input interface{}, input2 interface{}, input3 interface{}, input4 interface{}) (string, error) {

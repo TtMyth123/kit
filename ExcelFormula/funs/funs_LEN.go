@@ -1,6 +1,6 @@
 package funs
 
-import "ttmyth123/kit/ExcelFormula/funs/k"
+import "github.com/TtMyth123/kit/ExcelFormula/funs/k"
 
 func LEN(input interface{}) (int, error) {
 	f := ""

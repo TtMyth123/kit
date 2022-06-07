@@ -2,7 +2,7 @@ package funs
 
 import (
 	"errors"
-	"ttmyth123/kit/ExcelFormula/funs/k"
+	"github.com/TtMyth123/kit/ExcelFormula/funs/k"
 )
 
 func SUMPRODUCT1(input1 interface{}) (float64, error) {

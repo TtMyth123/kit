@@ -2,25 +2,27 @@ package TmpFileKit
 
 import (
 	"fmt"
+	"github.com/TtMyth123/kit/fileKit"
 	"os"
 	"time"
-	"ttmyth123/kit/fileKit"
 )
 
 var aTmpFileKit *TmpFileKit
+
 func init() {
 	aTmpFileKit = new(TmpFileKit)
 	aTmpFileKit.mpFile = make(map[string]string)
 }
+
 type TmpFileKit struct {
 	mpFile map[string]string
 }
 
-func AddFile(key,filePath string, t int) {
+func AddFile(key, filePath string, t int) {
 	aTmpFileKit.mpFile[key] = filePath
 	go func(key string) {
 		t := time.NewTimer(time.Second * time.Duration(t))
-		for{
+		for {
 			<-t.C
 			t.Stop()
 			aFilePath := aTmpFileKit.mpFile[key]
@@ -28,28 +30,26 @@ func AddFile(key,filePath string, t int) {
 		}
 	}(key)
 }
-func ToNewPath(key, path,name string) (string,error) {
+func ToNewPath(key, path, name string) (string, error) {
 	filePath := aTmpFileKit.mpFile[key]
 	fileInfo, e := os.Stat(filePath)
-	if e!= nil {
-		return filePath,e
+	if e != nil {
+		return filePath, e
 	}
 
-	if name=="" {
+	if name == "" {
 		fileKit.CreateMutiDir(path)
-		a :=fileInfo.Name()
-		newFilePath := fmt.Sprintf("%s/%s",path,a)
-		return newFilePath,os.Rename(filePath,newFilePath)
+		a := fileInfo.Name()
+		newFilePath := fmt.Sprintf("%s/%s", path, a)
+		return newFilePath, os.Rename(filePath, newFilePath)
 
 	} else {
 		fileKit.CreateMutiDir(path)
-		newFilePath := fmt.Sprintf("%s/%s",path,name)
-		return newFilePath, os.Rename(filePath,newFilePath)
+		newFilePath := fmt.Sprintf("%s/%s", path, name)
+		return newFilePath, os.Rename(filePath, newFilePath)
 	}
 }
 
-func GetFilePath(key string)string  {
+func GetFilePath(key string) string {
 	return aTmpFileKit.mpFile[key]
 }
-
-

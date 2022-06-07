@@ -2,8 +2,8 @@ package funs
 
 import (
 	"errors"
+	"github.com/TtMyth123/kit/ExcelFormula/funs/k"
 	"strings"
-	"ttmyth123/kit/ExcelFormula/funs/k"
 )
 
 func SEARCH3(input interface{}, input2 interface{}, input3 interface{}) (int, error) {

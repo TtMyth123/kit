@@ -3,7 +3,7 @@ package funs
 import (
 	"errors"
 	"fmt"
-	"ttmyth123/kit/ExcelFormula/funs/k"
+	"github.com/TtMyth123/kit/ExcelFormula/funs/k"
 )
 
 func MEDIAN(input interface{}) (float64, error) {

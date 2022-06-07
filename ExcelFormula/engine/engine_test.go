@@ -7,8 +7,8 @@ import (
 	"os"
 	"testing"
 
+	f1Formula "github.com/TtMyth123/kit/ExcelFormula/formula"
 	"github.com/tealeg/xlsx"
-	f1Formula "ttmyth123/kit/ExcelFormula/formula"
 )
 
 var EPSILON = math.Pow(10, -9)
