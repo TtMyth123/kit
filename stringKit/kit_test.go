@@ -2,7 +2,7 @@ package stringKit
 
 import (
 	"fmt"
-	"github.com/ttmyth123/kit/strconvEx"
+	"github.com/TtMyth123/kit/strconvEx"
 	"strconv"
 	"testing"
 	"time"
