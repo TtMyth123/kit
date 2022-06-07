@@ -1,4 +1,4 @@
-module ttmyth123/kit
+module github.com/ttmyth123/kit
 
 go 1.16
 
@@ -16,4 +16,3 @@ require (
 	golang.org/x/text v0.3.6
 )
 
-replace ttmyth123/kit => D:\work\go\WorkSpace\src\ttmyth123\kit
