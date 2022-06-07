@@ -1,4 +1,4 @@
-module github.com/ttmyth123/kit
+module github.com/TtMyth123/kit
 
 go 1.16
 
