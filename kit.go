@@ -9,7 +9,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"math"
 	"reflect"
 	"strconv"
 )
@@ -109,7 +108,7 @@ func GetInterface2Int(mp interface{}, k int) int {
 		}
 	}
 
-	v := GetInterface2Str(mp,fmt.Sprint(k))
+	v := GetInterface2Str(mp, fmt.Sprint(k))
 	r, e := strconv.Atoi(v)
 	if e == nil {
 		return r
@@ -133,8 +132,6 @@ func GetInterface2Int64(mp interface{}, k int64) int64 {
 	if r1, ok := mp.(float64); ok {
 		return int64(r1)
 	}
-
-
 
 	if r1, ok := mp.(uint8); ok {
 		return int64(r1)
@@ -167,7 +164,7 @@ func GetInterface2Int64(mp interface{}, k int64) int64 {
 		}
 	}
 
-	v := GetInterface2Str(mp,fmt.Sprint(k))
+	v := GetInterface2Str(mp, fmt.Sprint(k))
 	r, e := strconv.ParseInt(v, 10, 64)
 	if e == nil {
 		return r
@@ -191,7 +188,6 @@ func GetInterface2Int32(mp interface{}, k int32) int32 {
 	if r1, ok := mp.(float64); ok {
 		return int32(r1)
 	}
-
 
 	if r1, ok := mp.(uint8); ok {
 		return int32(r1)
@@ -221,7 +217,7 @@ func GetInterface2Int32(mp interface{}, k int32) int32 {
 		}
 	}
 
-	v := GetInterface2Str(mp,fmt.Sprint(k))
+	v := GetInterface2Str(mp, fmt.Sprint(k))
 	r, e := strconv.ParseInt(v, 10, 64)
 	if e == nil {
 		return int32(r)
@@ -255,8 +251,6 @@ func GetInterface2Float64(mp interface{}, k float64) float64 {
 		return float64(r1)
 	}
 
-
-
 	if r1, ok := mp.(uint8); ok {
 		return float64(r1)
 	}
@@ -285,7 +279,7 @@ func GetInterface2Float64(mp interface{}, k float64) float64 {
 		}
 	}
 
-	v := GetInterface2Str(mp,fmt.Sprint(k))
+	v := GetInterface2Str(mp, fmt.Sprint(k))
 	r, e := strconv.ParseFloat(v, 64)
 	if e == nil {
 		return r
@@ -331,20 +325,20 @@ func GetGuid() string {
 	}
 	return GetMd5String(base64.URLEncoding.EncodeToString(b))
 }
+
 /**
  * 获取一个Guid值
  */
 func GetGuidEx() string {
-	 guid := GetGuid()
-	 newGuid :=fmt.Sprintf("%s-%s-%s-%s-%s", guid[:8],
-	 	guid[8:12],
-		 guid[12:16],
-		 guid[16:20],
-		 guid[20:],
-	 )
-	 return newGuid
+	guid := GetGuid()
+	newGuid := fmt.Sprintf("%s-%s-%s-%s-%s", guid[:8],
+		guid[8:12],
+		guid[12:16],
+		guid[16:20],
+		guid[20:],
+	)
+	return newGuid
 }
- 
 
 /**
  * 对一个字符串进行MD5加密,不可解密
@@ -376,30 +370,31 @@ func ToJsonUnmarshal(strJson string, aData interface{}) error {
 	return json.Unmarshal(bData, aData)
 }
 func Decimal(value float64) float64 {
-	return math.Trunc(value*1e2+0.5) * 1e-2
+	value, _ = strconv.ParseFloat(fmt.Sprintf("%.2f", value), 64)
+	return value
 }
 
-func GetValueByName(data interface{},fieldName string) (interface{},bool) {
-	getT :=	reflect.TypeOf(data)
-	getV :=	reflect.ValueOf(data)
-	_,ok := getT.FieldByName(fieldName)
+func GetValueByName(data interface{}, fieldName string) (interface{}, bool) {
+	getT := reflect.TypeOf(data)
+	getV := reflect.ValueOf(data)
+	_, ok := getT.FieldByName(fieldName)
 	if ok {
 		v := getV.FieldByName(fieldName)
-		return  v.Interface(),ok
+		return v.Interface(), ok
 	}
 
-	return nil,false
+	return nil, false
 }
 
 /**
 data 不能是地址
- */
-func GetValueByNames(data interface{},fieldNames []string) map[string]interface{} {
+*/
+func GetValueByNames(data interface{}, fieldNames []string) map[string]interface{} {
 	mpData := make(map[string]interface{})
-	getT :=	reflect.TypeOf(data)
-	getV :=	reflect.ValueOf(data)
-	for _,f:= range fieldNames {
-		_,ok := getT.FieldByName(f)
+	getT := reflect.TypeOf(data)
+	getV := reflect.ValueOf(data)
+	for _, f := range fieldNames {
+		_, ok := getT.FieldByName(f)
 		if ok {
 			v := getV.FieldByName(f)
 			mpData[f] = v.Interface()
