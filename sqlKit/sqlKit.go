@@ -3,6 +3,8 @@ package sqlKit
 import (
 	"bytes"
 	"fmt"
+	"github.com/astaxie/beego/orm"
+	"io/ioutil"
 	"strings"
 )
 
@@ -14,8 +16,8 @@ page：第几面。1：为第1页
 
 pageCount
 */
-func GetOffset(AllCount, onePageCount, page int) (offset,pageCount int) {
-	if onePageCount<=0 {
+func GetOffset(AllCount, onePageCount, page int) (offset, pageCount int) {
+	if onePageCount <= 0 {
 		onePageCount = 10
 	}
 	//4/2
@@ -69,4 +71,15 @@ func GetWhereInNum(fieldName, str string) string {
 	return sql
 }
 
-
+func ExecSqlFile(o orm.Ormer, fileName string) error {
+	if o == nil {
+		o = orm.NewOrm()
+	}
+	fileT, e := ioutil.ReadFile(fileName)
+	if e != nil {
+		return e
+	}
+	strText := string(fileT)
+	_, e = o.Raw(strText).Exec()
+	return e
+}
