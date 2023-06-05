@@ -3,8 +3,6 @@ package sqlKit
 import (
 	"bytes"
 	"fmt"
-	"github.com/astaxie/beego/orm"
-	"io/ioutil"
 	"strings"
 )
 
@@ -71,15 +69,15 @@ func GetWhereInNum(fieldName, str string) string {
 	return sql
 }
 
-func ExecSqlFile(o orm.Ormer, fileName string) error {
-	if o == nil {
-		o = orm.NewOrm()
-	}
-	fileT, e := ioutil.ReadFile(fileName)
-	if e != nil {
-		return e
-	}
-	strText := string(fileT)
-	_, e = o.Raw(strText).Exec()
-	return e
-}
+//func ExecSqlFile(o orm.Ormer, fileName string) error {
+//	if o == nil {
+//		o = orm.NewOrm()
+//	}
+//	fileT, e := ioutil.ReadFile(fileName)
+//	if e != nil {
+//		return e
+//	}
+//	strText := string(fileT)
+//	_, e = o.Raw(strText).Exec()
+//	return e
+//}
