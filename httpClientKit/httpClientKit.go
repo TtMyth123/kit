@@ -44,6 +44,7 @@ func (this *HttpClient) setBusyStatus(b bool) {
 func (this *HttpClient) GetClient() *http.Client {
 	return this.client
 }
+
 func GetHttpClient(guid string) *HttpClient {
 	tr := &http.Transport{
 		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
