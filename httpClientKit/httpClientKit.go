@@ -30,9 +30,13 @@ type HttpClient struct {
 
 var timeout = 30
 
-func SetTimeut(t int) {
+func SetTimeout(t int) {
 	timeout = t
 }
+func (this *HttpClient) GetClient() *http.Client {
+	return this.client
+}
+
 func (this *HttpClient) GetBusyStatus() bool {
 	return this.isBusy
 }
