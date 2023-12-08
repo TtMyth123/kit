@@ -33,9 +33,6 @@ var timeout = 30
 func SetTimeout(t int) {
 	timeout = t
 }
-func (this *HttpClient) GetClient() *http.Client {
-	return this.client
-}
 
 func (this *HttpClient) GetBusyStatus() bool {
 	return this.isBusy
@@ -43,6 +40,9 @@ func (this *HttpClient) GetBusyStatus() bool {
 
 func (this *HttpClient) setBusyStatus(b bool) {
 	this.isBusy = b
+}
+func (this *HttpClient) GetClient() *http.Client {
+	return this.client
 }
 func GetHttpClient(guid string) *HttpClient {
 	tr := &http.Transport{
