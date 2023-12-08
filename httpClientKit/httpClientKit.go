@@ -68,61 +68,115 @@ func GetHttpClient(guid string) *HttpClient {
 }
 
 func SetHttpProxy(guid, HttpProxyUrl string) *HttpClient {
-	ProxyURL, _ := url.Parse(HttpProxyUrl)
-	tr := &http.Transport{
-		Proxy:           http.ProxyURL(ProxyURL),
-		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
-		Dial: func(netw, addr string) (net.Conn, error) {
-			conn, err := net.DialTimeout(netw, addr, time.Second*time.Duration(timeout))
-			if err != nil {
-				return nil, err
-			}
-			conn.SetDeadline(time.Now().Add(time.Second * time.Duration(timeout)))
-			return conn, nil
-		},
-		ResponseHeaderTimeout: time.Second * time.Duration(timeout),
-	}
+	if HttpProxyUrl == "" {
+		tr := &http.Transport{
+			TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+			Dial: func(netw, addr string) (net.Conn, error) {
+				conn, err := net.DialTimeout(netw, addr, time.Second*time.Duration(timeout))
+				if err != nil {
+					return nil, err
+				}
+				conn.SetDeadline(time.Now().Add(time.Second * time.Duration(timeout)))
+				return conn, nil
+			},
+			ResponseHeaderTimeout: time.Second * time.Duration(timeout),
+		}
 
-	client := &HttpClient{}
-	if guid == "" {
-		guid = kit.GetGuid()
-	}
-	client.client = &http.Client{Transport: tr}
-	//client.client = &http.Client{}
-	client.gCurCookieJar, _ = cookiejar.New(nil)
-	client.Id = guid
+		client := &HttpClient{}
+		if guid == "" {
+			guid = kit.GetGuid()
+		}
+		client.client = &http.Client{Transport: tr}
+		//client.client = &http.Client{}
+		client.gCurCookieJar, _ = cookiejar.New(nil)
+		client.Id = guid
 
-	client.start = time.Now()
-	return client
+		client.start = time.Now()
+		return client
+	} else {
+		ProxyURL, _ := url.Parse(HttpProxyUrl)
+		tr := &http.Transport{
+			Proxy:           http.ProxyURL(ProxyURL),
+			TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+			Dial: func(netw, addr string) (net.Conn, error) {
+				conn, err := net.DialTimeout(netw, addr, time.Second*time.Duration(timeout))
+				if err != nil {
+					return nil, err
+				}
+				conn.SetDeadline(time.Now().Add(time.Second * time.Duration(timeout)))
+				return conn, nil
+			},
+			ResponseHeaderTimeout: time.Second * time.Duration(timeout),
+		}
+
+		client := &HttpClient{}
+		if guid == "" {
+			guid = kit.GetGuid()
+		}
+		client.client = &http.Client{Transport: tr}
+		//client.client = &http.Client{}
+		client.gCurCookieJar, _ = cookiejar.New(nil)
+		client.Id = guid
+
+		client.start = time.Now()
+		return client
+	}
 }
 
 func GetProxyHttp(guid, HttpProxyUrl string) *HttpClient {
-	ProxyURL, _ := url.Parse(HttpProxyUrl)
-	tr := &http.Transport{
-		Proxy:           http.ProxyURL(ProxyURL),
-		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
-		Dial: func(netw, addr string) (net.Conn, error) {
-			conn, err := net.DialTimeout(netw, addr, time.Second*time.Duration(timeout))
-			if err != nil {
-				return nil, err
-			}
-			conn.SetDeadline(time.Now().Add(time.Second * time.Duration(timeout)))
-			return conn, nil
-		},
-		ResponseHeaderTimeout: time.Second * time.Duration(timeout),
-	}
+	if HttpProxyUrl == "" {
+		tr := &http.Transport{
+			TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+			Dial: func(netw, addr string) (net.Conn, error) {
+				conn, err := net.DialTimeout(netw, addr, time.Second*time.Duration(timeout))
+				if err != nil {
+					return nil, err
+				}
+				conn.SetDeadline(time.Now().Add(time.Second * time.Duration(timeout)))
+				return conn, nil
+			},
+			ResponseHeaderTimeout: time.Second * time.Duration(timeout),
+		}
 
-	client := &HttpClient{}
-	if guid == "" {
-		guid = kit.GetGuid()
-	}
-	client.client = &http.Client{Transport: tr}
-	//client.client = &http.Client{}
-	client.gCurCookieJar, _ = cookiejar.New(nil)
-	client.Id = guid
+		client := &HttpClient{}
+		if guid == "" {
+			guid = kit.GetGuid()
+		}
+		client.client = &http.Client{Transport: tr}
+		//client.client = &http.Client{}
+		client.gCurCookieJar, _ = cookiejar.New(nil)
+		client.Id = guid
 
-	client.start = time.Now()
-	return client
+		client.start = time.Now()
+		return client
+	} else {
+		ProxyURL, _ := url.Parse(HttpProxyUrl)
+		tr := &http.Transport{
+			Proxy:           http.ProxyURL(ProxyURL),
+			TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+			Dial: func(netw, addr string) (net.Conn, error) {
+				conn, err := net.DialTimeout(netw, addr, time.Second*time.Duration(timeout))
+				if err != nil {
+					return nil, err
+				}
+				conn.SetDeadline(time.Now().Add(time.Second * time.Duration(timeout)))
+				return conn, nil
+			},
+			ResponseHeaderTimeout: time.Second * time.Duration(timeout),
+		}
+
+		client := &HttpClient{}
+		if guid == "" {
+			guid = kit.GetGuid()
+		}
+		client.client = &http.Client{Transport: tr}
+		//client.client = &http.Client{}
+		client.gCurCookieJar, _ = cookiejar.New(nil)
+		client.Id = guid
+
+		client.start = time.Now()
+		return client
+	}
 }
 
 func (this *HttpClient) Clear() {
