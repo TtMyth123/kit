@@ -187,6 +187,10 @@ func GetProxyHttp(guid, HttpProxyUrl string) *HttpClient {
 func (this *HttpClient) Clear() {
 	this.gCurCookieJar, _ = cookiejar.New(nil)
 }
+
+func (this *HttpClient) CurCookieJa() *cookiejar.Jar {
+	return this.gCurCookieJar
+}
 func (this *HttpClient) GetString1(strUrl string) (string, error) {
 	this.isBusy = true
 	defer this.setBusyStatus(false)
