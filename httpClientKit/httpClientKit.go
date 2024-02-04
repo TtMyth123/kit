@@ -2,8 +2,10 @@ package httpClientKit
 
 import (
 	"crypto/tls"
+	"encoding/json"
 	"fmt"
 	"github.com/TtMyth123/kit"
+	"github.com/TtMyth123/kit/httpClientKit/multipartbuilder"
 	"github.com/TtMyth123/kit/httpKit"
 	"golang.org/x/text/encoding/simplifiedchinese"
 	"io"
@@ -12,6 +14,7 @@ import (
 	"net/http"
 	"net/http/cookiejar"
 	"net/url"
+	"strconv"
 	"strings"
 	"time"
 )
@@ -296,6 +299,104 @@ func (this *HttpClient) GetStringParam(strUrl string, param map[string]interface
 	newUrl, _ := httpKit.GetUrl(strUrl, param)
 
 	return this.GetString(newUrl)
+}
+func (this *HttpClient) PostRequestMap(strUrl string, params map[string]interface{}) ([]byte, error) {
+	//newUrl, _ := httpKit.GetUrl(strUrl, param)
+	builder := multipartbuilder.New()
+
+	//fileParams := map[string]InputFile{}
+	stringParams := map[string]string{}
+
+Loop:
+	for key, rawParam := range params {
+		if rawParam == nil {
+			continue Loop
+		}
+
+		var stringParam string
+
+		switch param := rawParam.(type) {
+		//case InputFile:
+		//	defer param.Close()
+		//
+		//	if param.IsStream() {
+		//		fileParams[key] = param
+		//	} else {
+		//		data, _ := ioutil.ReadAll(param.GetReader())
+		//		stringParam = string(data)
+		//	}
+
+		case bool:
+			stringParam = strconv.FormatBool(param)
+
+		case *bool:
+			stringParam = strconv.FormatBool(*param)
+
+		case int64:
+			stringParam = strconv.FormatInt(param, 10)
+
+		case *int64:
+			stringParam = strconv.FormatInt(*param, 10)
+
+		case float64:
+			stringParam = strconv.FormatFloat(param, 'g', -1, 64)
+
+		case *float64:
+			stringParam = strconv.FormatFloat(*param, 'g', -1, 64)
+
+		case string:
+			stringParam = param
+
+		case *string:
+			stringParam = *param
+
+		default:
+			stringerParam, isStringer := param.(fmt.Stringer)
+			if isStringer {
+				stringParam = stringerParam.String()
+			} else {
+				byteParam, err := json.Marshal(param)
+				if err != nil {
+					return nil, err
+				}
+				stringParam = string(byteParam)
+			}
+		}
+
+		stringParams[key] = stringParam
+	}
+
+	for key, param := range stringParams {
+		builder.AddField(key, param)
+	}
+
+	//for key, file := range fileParams {
+	//	builder.AddReader(key, file.Name(), file.GetReader())
+	//}
+
+	var bodyReader io.ReadCloser
+	var contentType = "application/json"
+
+	if len(stringParams) > 0 {
+		contentType, bodyReader = builder.Build()
+		defer bodyReader.Close()
+	}
+	req, err := http.NewRequest("POST", strUrl, bodyReader)
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Set("Content-Type", contentType)
+
+	resp, err := this.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	data, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return nil, err
+	}
+
+	return data, err
 }
 
 func (this *HttpClient) GetBytesEx(strUrl string) ([]byte, error) {
