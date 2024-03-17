@@ -107,6 +107,30 @@ func (this *TtRedisCache) DelCache(key string) error {
 		return nil
 	}
 }
+func (this *TtRedisCache) Get(key string, to interface{}) (interface{}, error) {
+	key = this.name + key
+	if this.cc == nil {
+		return to, errors.New("cc is nil")
+	}
+
+	defer func() {
+		if r := recover(); r != nil {
+			this.cc = nil
+		}
+	}()
+
+	data := this.cc.Get(key)
+	if data == nil {
+		return to, errors.New("Cache不存在")
+	}
+
+	err := Decode(data.([]byte), to)
+	if err != nil {
+
+	}
+
+	return to, err
+}
 
 // Encode
 // 用gob进行数据编码
