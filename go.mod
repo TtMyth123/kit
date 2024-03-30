@@ -1,5 +1,4 @@
 module github.com/TtMyth123/kit
-
 go 1.18
 
 require (
