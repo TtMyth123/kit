@@ -4,19 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="46c81dec-e4db-45df-a6ba-1d8dc7e0ca56" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/ffmpegKit/doc/img.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ffmpegKit/doc/img_1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ffmpegKit/doc/img_2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ffmpegKit/doc/readme.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ffmpegKit/ffmpegKit.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ffmpegKit/ffmpegKit_test.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ffmpegKit/testData/aaa2.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ffmpegKit/testData/out1.jpeg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="46c81dec-e4db-45df-a6ba-1d8dc7e0ca56" name="Changes" comment="Get(key string, to interface{}) (interface{}, error)&#10;to&#10;GetCacheData(key string) (any, error)">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
     </list>
@@ -32,7 +22,7 @@
       </list>
     </option>
   </component>
-  <component name="GOROOT" url="file://$PROJECT_DIR$/../../../../sdk/go1.18" />
+  <component name="GOROOT" url="file://$PROJECT_DIR$/../../../../../../Tool/SDK/Go/go1.18" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -43,41 +33,54 @@
   &quot;associatedIndex&quot;: 4
 }</component>
   <component name="ProjectId" id="2YT1FcZHwYLG6c9VqEF8UbR2O0v" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="autoscrollFromSource" value="true" />
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultGoTemplateProperty&quot;: &quot;Go File&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.modules.automatic.dependencies.download&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
-    &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/work/go/WorkSpace/src/TtMyth123/kit/ffmpegKit/testData&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultGoTemplateProperty": "Go File",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.go.format.on.save.advertiser.fired": "true",
+    "RunOnceActivity.go.formatter.settings.were.checked": "true",
+    "RunOnceActivity.go.migrated.go.modules.settings": "true",
+    "RunOnceActivity.go.modules.automatic.dependencies.download": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "master",
+    "go.import.settings.migrated": "true",
+    "go.sdk.automatically.set": "true",
+    "last_opened_file_path": "D:/work/go/WorkSpace/src/TtMyth123/kit/httpClientKit/multipartbuilder",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "go.sdk",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\work\go\WorkSpace\src\TtMyth123\kit\httpClientKit\multipartbuilder" />
       <recent name="D:\work\go\WorkSpace\src\TtMyth123\kit\ffmpegKit\testData" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\work\go\WorkSpace\src\TtMyth123\kit\ffmpegKit\doc" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Go Test.TestTtRedisCache in github.com/TtMyth123/kit/CacheDataKit/TtRedisC">
+    <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
+      <module name="kit" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="github.com/TtMyth123/kit" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
     <configuration name="TestExampleReadFrameAsJpeg in github.com/TtMyth123/kit/ffmpegKit" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="kit" />
       <working_directory value="$PROJECT_DIR$/ffmpegKit" />
@@ -90,8 +93,31 @@
       <pattern value="^\QTestExampleReadFrameAsJpeg\E$" />
       <method v="2" />
     </configuration>
+    <configuration name="TestTtRedisCache in github.com/TtMyth123/kit/CacheDataKit/TtRedisC" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="kit" />
+      <working_directory value="$PROJECT_DIR$/CacheDataKit/TtRedisC" />
+      <root_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="github.com/TtMyth123/kit/CacheDataKit/TtRedisC" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTestTtRedisCache\E$" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="GoTestRunConfiguration" factoryName="Go Test">
+      <module name="kit" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="DIRECTORY" />
+      <package value="github.com/TtMyth123/kit" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Test.TestTtRedisCache in github.com/TtMyth123/kit/CacheDataKit/TtRedisC" />
         <item itemvalue="Go Test.TestExampleReadFrameAsJpeg in github.com/TtMyth123/kit/ffmpegKit" />
       </list>
     </recent_temporary>
@@ -105,13 +131,104 @@
       <option name="presentableId" value="Default" />
       <updated>1700534652338</updated>
       <workItem from="1700534653434" duration="1409000" />
+      <workItem from="1702037344904" duration="948000" />
+      <workItem from="1702039000253" duration="591000" />
+      <workItem from="1705244430414" duration="820000" />
+      <workItem from="1707058552244" duration="2082000" />
+      <workItem from="1707060879832" duration="1288000" />
+      <workItem from="1707062189060" duration="906000" />
+      <workItem from="1707063198588" duration="1122000" />
+      <workItem from="1707121807492" duration="1503000" />
+      <workItem from="1710650478467" duration="1173000" />
+      <workItem from="1711802000729" duration="1916000" />
     </task>
+    <task id="LOCAL-00001" summary="GetProxyHttp">
+      <created>1702032221254</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1702032221254</updated>
+    </task>
+    <task id="LOCAL-00002" summary="httpClientKit 添加 GetClient">
+      <created>1702032546841</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1702032546841</updated>
+    </task>
+    <task id="LOCAL-00003" summary="httpClientKit 添加 GetClient">
+      <created>1702033063421</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1702033063421</updated>
+    </task>
+    <task id="LOCAL-00004" summary="httpClientKit 添加 GetClient">
+      <created>1702033212460</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1702033212460</updated>
+    </task>
+    <task id="LOCAL-00005" summary="httpClientKit 添加 CurCookieJa">
+      <created>1705244598088</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1705244598088</updated>
+    </task>
+    <task id="LOCAL-00006" summary="httpClientKit 添加 PostRequestMap">
+      <created>1707059756297</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1707059756297</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Get(key string, to interface{}) (interface{}, error)">
+      <created>1710650854119</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1710650854119</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Get(key string, to interface{}) (interface{}, error)&#10;to&#10;GetCacheData(key string) (any, error)">
+      <created>1711802896334</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1711802896334</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="GetProxyHttp" />
+    <MESSAGE value="httpClientKit 添加 GetClient" />
+    <MESSAGE value="httpClientKit 添加 CurCookieJa" />
+    <MESSAGE value="httpClientKit 添加 PostRequestMap" />
+    <MESSAGE value="Get(key string, to interface{}) (interface{}, error)" />
+    <MESSAGE value="Get(key string, to interface{}) (interface{}, error)&#10;to&#10;GetCacheData(key string) (any, error)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Get(key string, to interface{}) (interface{}, error)&#10;to&#10;GetCacheData(key string) (any, error)" />
+  </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
