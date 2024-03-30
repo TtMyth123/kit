@@ -107,8 +107,9 @@ func (this *TtRedisCache) DelCache(key string) error {
 		return nil
 	}
 }
-func (this *TtRedisCache) Get(key string, to interface{}) (interface{}, error) {
+func (this *TtRedisCache) GetCacheData(key string) (any, error) {
 	key = this.name + key
+	var to any
 	if this.cc == nil {
 		return to, errors.New("cc is nil")
 	}
