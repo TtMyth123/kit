@@ -7,7 +7,8 @@ type ICache interface {
 	SetCache(key string, value interface{}, timeout int) error
 	GetCache(key string, to interface{}) error
 	DelCache(key string) error
-	GetCacheData(key string) (any, error)
+
+	GetCacheData(key string) (any, error) //tt
 }
 
 // Instance is a function create a new Cache Instance
