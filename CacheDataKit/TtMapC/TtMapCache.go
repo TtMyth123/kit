@@ -24,10 +24,10 @@ func NewTtMapCache() CacheDataKit.ICache {
 func (this *TtMapCache) tryDelCache() {
 	this.mpT.Range(func(key, value any) bool {
 		t := value.(*tmpT)
-		if t.T1 > 0 {
+		if t.T1 > 1 {
 			t.T1--
 		}
-		if t.T1 == 0 {
+		if t.T1 == 1 {
 			k := key.(string)
 			this.DelCache(k)
 		}
