@@ -21,6 +21,9 @@ func NewTtMapCache() CacheDataKit.ICache {
 	aTtRedisCache := TtMapCache{}
 	return &aTtRedisCache
 }
+func (this *TtMapCache) Version() int {
+	return CacheDataKit.V3
+}
 func (this *TtMapCache) tryDelCache() {
 	this.mpT.Range(func(key, value any) bool {
 		t := value.(*tmpT)

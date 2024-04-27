@@ -20,6 +20,9 @@ func NewTtRedisCache() CacheDataKit.ICache {
 	aTtRedisCache := TtRedisCache{}
 	return &aTtRedisCache
 }
+func (this *TtRedisCache) Version() int {
+	return CacheDataKit.V3
+}
 
 func (this *TtRedisCache) StartAndGC(mpConfig map[string]interface{}) error {
 	host := mpConfig[ConfigKey_host]
