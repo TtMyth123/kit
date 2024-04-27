@@ -2,6 +2,8 @@ package CacheDataKit
 
 import "fmt"
 
+const V1 = 1
+
 type ICache interface {
 	StartAndGC(mpConfig map[string]interface{}) error
 	SetCache(key string, value interface{}, timeout int) error
