@@ -23,8 +23,8 @@ func TestTtRedisCache(t *testing.T) {
 	mCache.SetCache("a", 1, 0)
 
 	a := 0
-	e = mCache.GetCache("a", &a)
+	b, e := mCache.GetCache("a", &a)
 	if e != nil {
-		fmt.Println(e)
+		fmt.Println(e, b)
 	}
 }

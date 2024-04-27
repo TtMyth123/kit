@@ -71,28 +71,28 @@ func (this *TtMapCache) storeTime(key string, timeout int) {
 	t := &tmpT{T2: timeout, T1: timeout}
 	this.mpT.Store(key, t)
 }
-func (this *TtMapCache) GetCache(key string, to interface{}) error {
+func (this *TtMapCache) GetCache(key string, to interface{}) (any, error) {
 	if data, ok := this.mpData.Load(key); ok {
 		//value := reflect.ValueOf(to)
 		to = data
 		this.reStoreTime(key)
-		return nil
-	}
-
-	return fmt.Errorf("Cache不存在")
-}
-
-func (this *TtMapCache) GetCacheData(key string) (any, error) {
-	if data, ok := this.mpData.Load(key); ok {
-		//value := reflect.ValueOf(to)
-		to := data.(any)
-		this.reStoreTime(key)
 		return to, nil
 	}
 
-	var to any
 	return to, fmt.Errorf("Cache不存在")
 }
+
+//func (this *TtMapCache) GetCacheData(key string) (any, error) {
+//	if data, ok := this.mpData.Load(key); ok {
+//		//value := reflect.ValueOf(to)
+//		to := data.(any)
+//		this.reStoreTime(key)
+//		return to, nil
+//	}
+//
+//	var to any
+//	return to, fmt.Errorf("Cache不存在")
+//}
 
 func (this *TtMapCache) DelCache(key string) error {
 	this.mpData.Delete(key)

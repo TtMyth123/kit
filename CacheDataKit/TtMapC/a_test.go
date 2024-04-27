@@ -1,49 +1,25 @@
 package TtMapC
 
-//type T1[T any] func(str string)  T
-//
-//type A struct {
-//	Str1 string
-//}
-//
-//type S1[T any] struct {
-//
-//}
-//type IC interface {
-//	 T1[A]
-//}
-//
-//
-//func (a *S1[T]) GetA(str string)  T{
-//	var aaa T
-//	e := stringKit.GetJsonObj(str, &aaa)
-//	fmt.Println(e)
-//	return aaa
-//}
-//
-//func NewIC() *S1[A] {
-//	aaa := &S1[A]{}
-//	return aaa
-//}
-//
-//func  GetA[T any](str string)  T{
-//	var aaa T
-//	e := stringKit.GetJsonObj(str, &aaa)
-//	fmt.Println(e)
-//	return aaa
-//}
-//
-//func TestA(t *testing.T) {
-//
-//	a := A{Str1: "aaa"}
-//
-//
-//	sssss11 := stringKit.GetJsonStr(a)
-//
-//	bbb1 := GetA[A](sssss11 )
-//	aaa := NewIC()
-//	bb1 := aaa.GetA(sssss11)
-//	aaa := &S1[A]{}
-// //fmt.Println(bbb1, bb1)
-//	fmt.Println(bbb1, aaa,bb1)
-//}
+import (
+	"fmt"
+	"github.com/TtMyth123/kit/CacheDataKit"
+	"testing"
+)
+
+func TestTtRedisCache(t *testing.T) {
+	CacheDataKit.Register(CacheDataKit.AdapterName_TtMapC, NewTtMapCache)
+	mpConfig := make(map[string]interface{})
+
+	mCache, e := CacheDataKit.NewCache(CacheDataKit.AdapterName_TtMapC, mpConfig)
+	if e != nil {
+		fmt.Println(e)
+	}
+
+	mCache.SetCache("a", 1, 0)
+
+	a := 0
+	b, e := mCache.GetCache("a", a)
+	if e != nil {
+		fmt.Println(e, b)
+	}
+}

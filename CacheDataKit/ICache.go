@@ -5,10 +5,8 @@ import "fmt"
 type ICache interface {
 	StartAndGC(mpConfig map[string]interface{}) error
 	SetCache(key string, value interface{}, timeout int) error
-	GetCache(key string, to interface{}) error
+	GetCache(key string, to interface{}) (any, error)
 	DelCache(key string) error
-
-	GetCacheData(key string) (any, error) //tt
 }
 
 // Instance is a function create a new Cache Instance

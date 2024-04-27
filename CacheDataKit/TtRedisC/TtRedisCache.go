@@ -63,53 +63,9 @@ func (this *TtRedisCache) SetCache(key string, value interface{}, timeout int) e
 		return nil
 	}
 }
-func (this *TtRedisCache) GetCache(key string, to interface{}) error {
+func (this *TtRedisCache) GetCache(key string, to interface{}) (any, error) {
 	key = this.name + key
 
-	if this.cc == nil {
-		return errors.New("cc is nil")
-	}
-
-	defer func() {
-		if r := recover(); r != nil {
-			this.cc = nil
-		}
-	}()
-
-	data := this.cc.Get(key)
-	if data == nil {
-		return errors.New("Cache不存在")
-	}
-
-	err := Decode(data.([]byte), to)
-	if err != nil {
-
-	}
-
-	return err
-}
-func (this *TtRedisCache) DelCache(key string) error {
-	key = this.name + key
-
-	if this.cc == nil {
-		return errors.New("cc is nil")
-	}
-	defer func() {
-		if r := recover(); r != nil {
-			//fmt.Println("get cache error caught: %v\n", r)
-			this.cc = nil
-		}
-	}()
-	err := this.cc.Delete(key)
-	if err != nil {
-		return errors.New("Cache删除失败")
-	} else {
-		return nil
-	}
-}
-func (this *TtRedisCache) GetCacheData(key string) (any, error) {
-	key = this.name + key
-	var to any
 	if this.cc == nil {
 		return to, errors.New("cc is nil")
 	}
@@ -132,10 +88,54 @@ func (this *TtRedisCache) GetCacheData(key string) (any, error) {
 
 	return to, err
 }
+func (this *TtRedisCache) DelCache(key string) error {
+	key = this.name + key
+
+	if this.cc == nil {
+		return errors.New("cc is nil")
+	}
+	defer func() {
+		if r := recover(); r != nil {
+			//fmt.Println("get cache error caught: %v\n", r)
+			this.cc = nil
+		}
+	}()
+	err := this.cc.Delete(key)
+	if err != nil {
+		return errors.New("Cache删除失败")
+	} else {
+		return nil
+	}
+}
+
+//func (this *TtRedisCache) GetCacheData(key string) (any, error) {
+//	key = this.name + key
+//	var to any
+//	if this.cc == nil {
+//		return to, errors.New("cc is nil")
+//	}
+//
+//	defer func() {
+//		if r := recover(); r != nil {
+//			this.cc = nil
+//		}
+//	}()
+//
+//	data := this.cc.Get(key)
+//	if data == nil {
+//		return to, errors.New("Cache不存在")
+//	}
+//
+//	err := Decode(data.([]byte), to)
+//	if err != nil {
+//
+//	}
+//
+//	return to, err
+//}
 
 // Encode
 // 用gob进行数据编码
-//
 func Encode(data interface{}) ([]byte, error) {
 	buf := bytes.NewBuffer(nil)
 	enc := gob.NewEncoder(buf)
@@ -148,7 +148,6 @@ func Encode(data interface{}) ([]byte, error) {
 
 // Decode
 // 用gob进行数据解码
-//
 func Decode(data []byte, to interface{}) error {
 	buf := bytes.NewBuffer(data)
 	dec := gob.NewDecoder(buf)
