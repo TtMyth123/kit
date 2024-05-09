@@ -8,7 +8,7 @@ type ICache interface {
 	Version() int
 	StartAndGC(mpConfig map[string]interface{}) error
 	SetCache(key string, value interface{}, timeout int) error
-	GetCache(key string, to interface{}) (any, error)
+	GetCache(key string, to interface{}) error
 	DelCache(key string) error
 }
 

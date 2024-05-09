@@ -66,13 +66,12 @@ func (this *TtRedisCache) SetCache(key string, value interface{}, timeout int) e
 		return nil
 	}
 }
-func (this *TtRedisCache) GetCache(key string, to interface{}) (any, error) {
+func (this *TtRedisCache) GetCache(key string, to interface{}) error {
 	key = this.name + key
 
 	if this.cc == nil {
-		return to, errors.New("cc is nil")
+		return errors.New("cc is nil")
 	}
-
 	defer func() {
 		if r := recover(); r != nil {
 			this.cc = nil
@@ -81,15 +80,11 @@ func (this *TtRedisCache) GetCache(key string, to interface{}) (any, error) {
 
 	data := this.cc.Get(key)
 	if data == nil {
-		return to, errors.New("Cache不存在")
+		return errors.New("Cache不存在")
 	}
 
 	err := Decode(data.([]byte), to)
-	if err != nil {
-
-	}
-
-	return to, err
+	return err
 }
 func (this *TtRedisCache) DelCache(key string) error {
 	key = this.name + key
@@ -110,32 +105,6 @@ func (this *TtRedisCache) DelCache(key string) error {
 		return nil
 	}
 }
-
-//func (this *TtRedisCache) GetCacheData(key string) (any, error) {
-//	key = this.name + key
-//	var to any
-//	if this.cc == nil {
-//		return to, errors.New("cc is nil")
-//	}
-//
-//	defer func() {
-//		if r := recover(); r != nil {
-//			this.cc = nil
-//		}
-//	}()
-//
-//	data := this.cc.Get(key)
-//	if data == nil {
-//		return to, errors.New("Cache不存在")
-//	}
-//
-//	err := Decode(data.([]byte), to)
-//	if err != nil {
-//
-//	}
-//
-//	return to, err
-//}
 
 // Encode
 // 用gob进行数据编码

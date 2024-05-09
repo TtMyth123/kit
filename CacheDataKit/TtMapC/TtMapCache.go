@@ -1,6 +1,8 @@
 package TtMapC
 
 import (
+	"bytes"
+	"encoding/gob"
 	"fmt"
 	"github.com/TtMyth123/kit/CacheDataKit"
 	"sync"
@@ -74,15 +76,21 @@ func (this *TtMapCache) storeTime(key string, timeout int) {
 	t := &tmpT{T2: timeout, T1: timeout}
 	this.mpT.Store(key, t)
 }
-func (this *TtMapCache) GetCache(key string, to interface{}) (any, error) {
+func (this *TtMapCache) GetCache(key string, to interface{}) error {
 	if data, ok := this.mpData.Load(key); ok {
 		//value := reflect.ValueOf(to)
-		to = data
+
+		bdata, e := Encode(data)
+		if e != nil {
+			return e
+		}
+		e = Decode(bdata, to)
+
 		this.reStoreTime(key)
-		return to, nil
+		return e
 	}
 
-	return to, fmt.Errorf("Cache不存在")
+	return fmt.Errorf("Cache不存在")
 }
 
 //func (this *TtMapCache) GetCacheData(key string) (any, error) {
@@ -101,4 +109,24 @@ func (this *TtMapCache) DelCache(key string) error {
 	this.mpData.Delete(key)
 	this.mpT.Delete(key)
 	return nil
+}
+
+// Encode
+// 用gob进行数据编码
+func Encode(data interface{}) ([]byte, error) {
+	buf := bytes.NewBuffer(nil)
+	enc := gob.NewEncoder(buf)
+	err := enc.Encode(data)
+	if err != nil {
+		return nil, err
+	}
+	return buf.Bytes(), nil
+}
+
+// Decode
+// 用gob进行数据解码
+func Decode(data []byte, to interface{}) error {
+	buf := bytes.NewBuffer(data)
+	dec := gob.NewDecoder(buf)
+	return dec.Decode(to)
 }
