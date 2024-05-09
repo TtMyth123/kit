@@ -21,7 +21,7 @@ func NewTtRedisCache() CacheDataKit.ICache {
 	return &aTtRedisCache
 }
 func (this *TtRedisCache) Version() int {
-	return CacheDataKit.V3
+	return CacheDataKit.V4
 }
 
 func (this *TtRedisCache) StartAndGC(mpConfig map[string]interface{}) error {

@@ -2,7 +2,7 @@ package CacheDataKit
 
 import "fmt"
 
-const V3 = 3
+const V4 = 4
 
 type ICache interface {
 	Version() int
