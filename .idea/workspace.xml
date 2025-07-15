@@ -4,11 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="46c81dec-e4db-45df-a6ba-1d8dc7e0ca56" name="Changes" comment="Get(key string, to interface{}) (interface{}, error)&#10;to&#10;GetCacheData(key string) (any, error)">
-      <change afterPath="$PROJECT_DIR$/CacheDataKit/TtMapC/TtMapCache.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CacheDataKit/TtMapC/a_test.go" afterDir="false" />
+    <list default="true" id="46c81dec-e4db-45df-a6ba-1d8dc7e0ca56" name="Changes" comment="TtMapCache">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CacheDataKit/ICache.go" beforeDir="false" afterPath="$PROJECT_DIR$/CacheDataKit/ICache.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goqueryKit/kit.go" beforeDir="false" afterPath="$PROJECT_DIR$/goqueryKit/kit.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pwdKit/pwd.go" beforeDir="false" afterPath="$PROJECT_DIR$/pwdKit/pwd.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pwdKit/pwd_tset.go" beforeDir="false" afterPath="$PROJECT_DIR$/pwdKit/pwd_tset.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,7 +23,7 @@
       </list>
     </option>
   </component>
-  <component name="GOROOT" url="file://$PROJECT_DIR$/../../../../../../Tool/SDK/Go/go1.18" />
+  <component name="GOROOT" url="file://$PROJECT_DIR$/../../../../../../Tool/SDK/Go/go1.21.0" />
   <component name="Git.Settings">
     <option name="PUSH_TAGS">
       <GitPushTagMode>
@@ -45,31 +46,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultGoTemplateProperty": "Go File",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.go.format.on.save.advertiser.fired": "true",
-    "RunOnceActivity.go.formatter.settings.were.checked": "true",
-    "RunOnceActivity.go.migrated.go.modules.settings": "true",
-    "RunOnceActivity.go.modules.automatic.dependencies.download": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "master",
-    "go.import.settings.migrated": "true",
-    "go.sdk.automatically.set": "true",
-    "last_opened_file_path": "D:/work/go/WorkSpace/src/TtMyth123/kit/CacheDataKit",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "go.sdk",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultGoTemplateProperty&quot;: &quot;Go File&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.format.on.save.advertiser.fired&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.modules.automatic.dependencies.download&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
+    &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/work/go/WorkSpace/src/TtMyth123/kit&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;go.vgo&quot;,
+    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\work\go\WorkSpace\src\TtMyth123\kit\SyncMapCache" />
       <recent name="D:\work\go\WorkSpace\src\TtMyth123\kit\CacheDataKit" />
       <recent name="D:\work\go\WorkSpace\src\TtMyth123\kit\httpClientKit\multipartbuilder" />
       <recent name="D:\work\go\WorkSpace\src\TtMyth123\kit\ffmpegKit\testData" />
@@ -78,7 +82,7 @@
       <recent name="D:\work\go\WorkSpace\src\TtMyth123\kit\ffmpegKit\doc" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Test.TestGetGuid in github.com/TtMyth123/kit">
+  <component name="RunManager" selected="Go Test.TestTtRedisCache in github.com/TtMyth123/kit/CacheDataKit/TtMapC (1)">
     <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
       <module name="kit" />
       <working_directory value="$PROJECT_DIR$" />
@@ -88,30 +92,55 @@
       <filePath value="$PROJECT_DIR$" />
       <method v="2" />
     </configuration>
-    <configuration name="TestExampleReadFrameAsJpeg in github.com/TtMyth123/kit/ffmpegKit" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+    <configuration name="TestA in github.com/TtMyth123/kit/SyncMapCache" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="kit" />
-      <working_directory value="$PROJECT_DIR$/ffmpegKit" />
+      <working_directory value="$PROJECT_DIR$/SyncMapCache" />
       <root_directory value="$PROJECT_DIR$" />
       <kind value="PACKAGE" />
-      <package value="github.com/TtMyth123/kit/ffmpegKit" />
+      <package value="github.com/TtMyth123/kit/SyncMapCache" />
       <directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$" />
       <framework value="gotest" />
-      <pattern value="^\QTestExampleReadFrameAsJpeg\E$" />
+      <pattern value="^\QTestA\E$" />
       <method v="2" />
     </configuration>
-    <configuration name="TestGetGuid in github.com/TtMyth123/kit" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+    <configuration name="TestTtRedisCache in github.com/TtMyth123/kit/CacheDataKit/TtMapC (1)" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="kit" />
-      <working_directory value="$PROJECT_DIR$" />
+      <working_directory value="$PROJECT_DIR$/CacheDataKit/TtMapC" />
+      <root_directory value="$PROJECT_DIR$" />
       <kind value="PACKAGE" />
-      <package value="github.com/TtMyth123/kit" />
+      <package value="github.com/TtMyth123/kit/CacheDataKit/TtMapC" />
       <directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$" />
       <framework value="gotest" />
-      <pattern value="^\QTestGetGuid\E$" />
+      <pattern value="^\QTestTtRedisCache\E$" />
       <method v="2" />
     </configuration>
-    <configuration name="TestTtRedisCache in github.com/TtMyth123/kit/CacheDataKit/TtRedisC" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+    <configuration name="TestTtRedisCache in github.com/TtMyth123/kit/CacheDataKit/TtMapC" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="kit" />
+      <working_directory value="$PROJECT_DIR$/CacheDataKit/TtMapC" />
+      <root_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="github.com/TtMyth123/kit/CacheDataKit/TtMapC" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTestTtRedisCache\E$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TestTtRedisCache in github.com/TtMyth123/kit/CacheDataKit/TtRedisC (1)" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="kit" />
+      <working_directory value="$PROJECT_DIR$/CacheDataKit/TtRedisC" />
+      <root_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="github.com/TtMyth123/kit/CacheDataKit/TtRedisC" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTestTtRedisCache\E$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TestTtRedisCache in github.com/TtMyth123/kit/CacheDataKit/TtRedisC (2)" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="kit" />
       <working_directory value="$PROJECT_DIR$/CacheDataKit/TtRedisC" />
       <root_directory value="$PROJECT_DIR$" />
@@ -135,9 +164,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Go Test.TestGetGuid in github.com/TtMyth123/kit" />
-        <item itemvalue="Go Test.TestTtRedisCache in github.com/TtMyth123/kit/CacheDataKit/TtRedisC" />
-        <item itemvalue="Go Test.TestExampleReadFrameAsJpeg in github.com/TtMyth123/kit/ffmpegKit" />
+        <item itemvalue="Go Test.TestTtRedisCache in github.com/TtMyth123/kit/CacheDataKit/TtMapC (1)" />
+        <item itemvalue="Go Test.TestTtRedisCache in github.com/TtMyth123/kit/CacheDataKit/TtRedisC (2)" />
+        <item itemvalue="Go Test.TestA in github.com/TtMyth123/kit/SyncMapCache" />
+        <item itemvalue="Go Test.TestTtRedisCache in github.com/TtMyth123/kit/CacheDataKit/TtMapC" />
+        <item itemvalue="Go Test.TestTtRedisCache in github.com/TtMyth123/kit/CacheDataKit/TtRedisC (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -161,7 +192,28 @@
       <workItem from="1710650478467" duration="1173000" />
       <workItem from="1711802000729" duration="3856000" />
       <workItem from="1711955888882" duration="20000" />
-      <workItem from="1712867410097" duration="36000" />
+      <workItem from="1712867410097" duration="889000" />
+      <workItem from="1714208485306" duration="4172000" />
+      <workItem from="1714362647541" duration="594000" />
+      <workItem from="1714634239119" duration="591000" />
+      <workItem from="1715244168140" duration="7146000" />
+      <workItem from="1715321630083" duration="592000" />
+      <workItem from="1715324490723" duration="1218000" />
+      <workItem from="1715333827292" duration="139000" />
+      <workItem from="1715335705779" duration="625000" />
+      <workItem from="1731575230479" duration="61000" />
+      <workItem from="1735476919329" duration="834000" />
+      <workItem from="1736746794895" duration="2484000" />
+      <workItem from="1736987445649" duration="1887000" />
+      <workItem from="1737068864322" duration="598000" />
+      <workItem from="1737276367078" duration="458000" />
+      <workItem from="1737442577384" duration="596000" />
+      <workItem from="1737626242367" duration="677000" />
+      <workItem from="1737701663855" duration="1202000" />
+      <workItem from="1737799666727" duration="599000" />
+      <workItem from="1740125258396" duration="568000" />
+      <workItem from="1742703269570" duration="771000" />
+      <workItem from="1743487754051" duration="1201000" />
     </task>
     <task id="LOCAL-00001" summary="GetProxyHttp">
       <created>1702032221254</created>
@@ -247,7 +299,70 @@
       <option name="project" value="LOCAL" />
       <updated>1711804656366</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="TtMapCache">
+      <created>1712867464132</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1712867464132</updated>
+    </task>
+    <task id="LOCAL-00014" summary="TtMapCache">
+      <created>1714208857525</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1714208857525</updated>
+    </task>
+    <task id="LOCAL-00015" summary="TtMapCache">
+      <created>1714211077468</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1714211077468</updated>
+    </task>
+    <task id="LOCAL-00016" summary="TtMapCache">
+      <created>1714211346054</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1714211346054</updated>
+    </task>
+    <task id="LOCAL-00017" summary="V3">
+      <created>1714211631773</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1714211631773</updated>
+    </task>
+    <task id="LOCAL-00018" summary="SyncMapCache">
+      <created>1715248932251</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1715248932251</updated>
+    </task>
+    <task id="LOCAL-00019" summary="TtMapCache">
+      <created>1715249784632</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1715249784632</updated>
+    </task>
+    <task id="LOCAL-00020" summary="TtMapCache">
+      <created>1715249797681</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1715249797681</updated>
+    </task>
+    <task id="LOCAL-00021" summary="TtMapCache">
+      <created>1715250015550</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1715250015550</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -271,10 +386,69 @@
     <MESSAGE value="httpClientKit 添加 PostRequestMap" />
     <MESSAGE value="Get(key string, to interface{}) (interface{}, error)" />
     <MESSAGE value="Get(key string, to interface{}) (interface{}, error)&#10;to&#10;GetCacheData(key string) (any, error)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Get(key string, to interface{}) (interface{}, error)&#10;to&#10;GetCacheData(key string) (any, error)" />
+    <MESSAGE value="V3" />
+    <MESSAGE value="SyncMapCache" />
+    <MESSAGE value="TtMapCache" />
+    <option name="LAST_COMMIT_MESSAGE" value="TtMapCache" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/CacheDataKit/TtMapC/a_test.go</url>
+          <line>9</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/CacheDataKit/TtRedisC/kit_test.go</url>
+          <line>23</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/CacheDataKit/TtRedisC/kit_test.go</url>
+          <line>27</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/CacheDataKit/TtRedisC/kit_test.go</url>
+          <line>52</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/CacheDataKit/TtMapC/a_test.go</url>
+          <line>22</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/CacheDataKit/TtMapC/a_test.go</url>
+          <line>60</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/SyncMapCache/a_test.go</url>
+          <line>22</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/SyncMapCache/a_test.go</url>
+          <line>20</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/CacheDataKit/TtMapC/a_test.go</url>
+          <line>24</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/CacheDataKit/ICache.go</url>
+          <line>35</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

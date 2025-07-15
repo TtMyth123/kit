@@ -38,5 +38,4 @@ func NewCache(adapterName string, mpConfig map[string]interface{}) (adapter ICac
 	if err != nil {
 		adapter = nil
 	}
-	return
 }

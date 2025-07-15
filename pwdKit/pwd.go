@@ -8,10 +8,12 @@ import (
 	"encoding/base64"
 	"encoding/hex"
 	"errors"
+	"fmt"
 	"io"
 )
 
-/**
+/*
+*
 奖pwd字符串进行Sha1加密并转换成string
 */
 func Sha1ToStr(pwd string) string {
@@ -21,7 +23,8 @@ func Sha1ToStr(pwd string) string {
 	return newPwd
 }
 
-/**
+/*
+*
 奖pwd字符串进行Sha256加密并转换成string
 */
 func Sha256ToStr(pwd string) string {
@@ -30,15 +33,16 @@ func Sha256ToStr(pwd string) string {
 	newPwd := base64.StdEncoding.EncodeToString(h.Sum(nil))
 	return newPwd
 }
-func HmacSha256(message string, secret string) string{
+func HmacSha256(message string, secret string) string {
 	key := []byte(secret)
 	h := hmac.New(sha256.New, key)
 	h.Write([]byte(message))
 	sha := hex.EncodeToString(h.Sum(nil))
-	 return sha
+	return sha
 }
 
-/**
+/*
+*
 奖pwd字符串进行Md5加密并转换成string
 */
 func Md5ToStr(pwd string) string {
@@ -48,15 +52,27 @@ func Md5ToStr(pwd string) string {
 	return newPwd
 }
 
-/**
+/*
+*
+标准将pwd字符串进行Md5加密并转换成string
+*/
+func StdMd5ToStr(pwd string) string {
+	md5data := md5.Sum([]byte(pwd))
+	str := fmt.Sprintf("%x", md5data)
+	return str
+}
+
+/*
+*
 给str编码，并加密
 */
 func TtEncodeToString(str, pwd string) string {
-	a := base64.StdEncoding.EncodeToString([]byte( pwd + str))
+	a := base64.StdEncoding.EncodeToString([]byte(pwd + str))
 	return a
 }
 
-/**
+/*
+*
 给str解码并 解密
 */
 func TtDecodeString(str, pwd string) (string, error) {

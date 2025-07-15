@@ -12,43 +12,46 @@ type TdNode struct {
 }
 
 func GetNodeText(node *html.Node) string {
-	s  := ""
-	for _,n := range node.Child{
+	s := ""
+	for _, n := range node.Child {
 		//if n.Type ==  html.TextNode {
 		//	s = s+n.Data
 		//}
-		s = s+GetNodeText(n)
+		s = s + GetNodeText(n)
 	}
-	if node.Type==html.TextNode {
-		s = s+node.Data
+	if node.Type == html.TextNode {
+		s = s + node.Data
 	}
 	return s
 }
 
-func GetTableNodes2Arr(tableNode goquery.Nodes) [][]TdNode{
-	arrData := make([][]TdNode,0)
+func GetTableNodes2Arr(tableNode goquery.Nodes) [][]TdNode {
+	arrData := make([][]TdNode, 0)
 	//trNodes := tableNode.Find("tr")
-	tableNode.Find("tr").Each(func (i int,trNode *goquery.Node) {
+	tableNode.Find("tr").Each(func(i int, trNode *goquery.Node) {
 
 		iLen := len(trNode.Child)
-		arrTd := make([]TdNode,0)
-		for i:=0;i<iLen;i++{
+		arrTd := make([]TdNode, 0)
+		for i := 0; i < iLen; i++ {
 			if trNode.Child[i].Data == "td" {
-				aTdNode := TdNode{Text: GetNodeText(trNode.Child[i]),Node: trNode.Child[i]}
-				arrTd = append(arrTd,aTdNode)
+				aTdNode := TdNode{Text: GetNodeText(trNode.Child[i]), Node: trNode.Child[i]}
+				arrTd = append(arrTd, aTdNode)
+			} else if trNode.Child[i].Data == "th" {
+				aTdNode := TdNode{Text: GetNodeText(trNode.Child[i]), Node: trNode.Child[i]}
+				arrTd = append(arrTd, aTdNode)
 			}
 		}
-		arrData = append(arrData,arrTd)
+		arrData = append(arrData, arrTd)
 	})
 
 	return arrData
 }
 
-func GetAttrMap(arrAttr []html.Attribute)map[string]string {
+func GetAttrMap(arrAttr []html.Attribute) map[string]string {
 	mp := make(map[string]string)
-	for _,attr := range arrAttr{
-		key:= strings.ToLower(attr.Key)
-		Value:= attr.Val
+	for _, attr := range arrAttr {
+		key := strings.ToLower(attr.Key)
+		Value := attr.Val
 		mp[key] = Value
 	}
 
