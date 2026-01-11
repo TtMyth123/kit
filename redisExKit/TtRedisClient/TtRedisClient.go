@@ -113,10 +113,18 @@ func (this *TtRedisClient) Get(key string) string {
 	key = this.GetNewKey(key)
 	return this.mClientRedis.Get(key).Val()
 }
+func (this *TtRedisClient) GetInt64(key string) (int64, error) {
+	key = this.GetNewKey(key)
+	return this.mClientRedis.Get(key).Int64()
+}
 
 func (this *TtRedisClient) Set(key string, data string) error {
 	key = this.GetNewKey(key)
 	return this.mClientRedis.Set(key, data, 0).Err()
+}
+func (this *TtRedisClient) SetValue(key string, value interface{}) error {
+	key = this.GetNewKey(key)
+	return this.mClientRedis.Set(key, value, 0).Err()
 }
 func (this *TtRedisClient) SetByTime(key string, data string, expiration time.Duration) error {
 	key = this.GetNewKey(key)
@@ -187,7 +195,8 @@ func (this *TtRedisClient) LPush(key string, data ...string) int64 {
 	return c
 }
 
-/**
+/*
+*
 取从位置0开始到位置2结束的3个元素。
 lrange mykey 0 2
 */
@@ -204,7 +213,6 @@ func (this *TtRedisClient) LLen(key string) int64 {
 
 // Encode
 // 用gob进行数据编码
-//
 func Encode(data interface{}) ([]byte, error) {
 	buf := bytes.NewBuffer(nil)
 	enc := gob.NewEncoder(buf)
@@ -217,7 +225,6 @@ func Encode(data interface{}) ([]byte, error) {
 
 // Decode
 // 用gob进行数据解码
-//
 func Decode(data []byte, to interface{}) error {
 	buf := bytes.NewBuffer(data)
 	dec := gob.NewDecoder(buf)
