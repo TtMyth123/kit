@@ -29,6 +29,8 @@ func Register(name string, adapter Instance) {
 
 func NewCache(adapterName string, mpConfig map[string]interface{}) (adapter ICache, err error) {
 	instanceFunc, ok := adapters[adapterName]
+
+	adapter = instanceFunc()
 	if !ok {
 		err = fmt.Errorf("cache: unknown adapter name %q (forgot to import?)", adapterName)
 		return
@@ -38,4 +40,6 @@ func NewCache(adapterName string, mpConfig map[string]interface{}) (adapter ICac
 	if err != nil {
 		adapter = nil
 	}
+
+	return
 }
